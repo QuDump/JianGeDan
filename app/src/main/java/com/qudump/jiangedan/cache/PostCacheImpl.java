@@ -25,7 +25,7 @@ public class PostCacheImpl implements PostCache {
 
     @Override
     public boolean isExpired() {
-        return false;
+        return true;
     }
 
     @Override

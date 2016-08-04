@@ -6,6 +6,8 @@ import com.qudump.jiangedan.repository.post.datasource.PostDataStore;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 /**
@@ -15,6 +17,7 @@ public class DiskPostDataStore implements PostDataStore{
 
     private PostCache postCache;
 
+    @Inject
     public DiskPostDataStore(PostCache postCache) {
         this.postCache = postCache;
     }

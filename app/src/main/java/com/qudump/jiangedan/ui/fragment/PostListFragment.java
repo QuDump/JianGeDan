@@ -1,9 +1,11 @@
 package com.qudump.jiangedan.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.presenter.PostListContract;
 import com.qudump.jiangedan.presenter.PostListPresenter;
+import com.qudump.jiangedan.ui.adapter.PostAdapter;
 
 import java.util.List;
 
@@ -34,6 +37,9 @@ public class PostListFragment extends Fragment implements PostListContract.View{
     @Inject
     PostListPresenter presenter;
 
+    private PostAdapter mAdapter;
+    private Context mContext;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +55,12 @@ public class PostListFragment extends Fragment implements PostListContract.View{
         init();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
     private void init(){
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -60,11 +72,15 @@ public class PostListFragment extends Fragment implements PostListContract.View{
                 presenter.loadRecent();
             }
         });
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mAdapter = new PostAdapter(mContext);
+        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
     public void renderView(List<Post> posts) {
-
+        mAdapter.setData(posts);
     }
 
     @Override
