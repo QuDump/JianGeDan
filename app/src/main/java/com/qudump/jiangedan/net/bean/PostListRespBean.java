@@ -43,18 +43,4 @@ public class PostListRespBean extends BaseResp{
         this.posts = posts;
     }
 
-    public static class PostBean{
-
-    }
-
-    public static class Tag {
-
-    }
-
-    public static class Author {
-
-    }
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.qudump.jiangedan.repository;
+package com.qudump.jiangedan.repository.joke;
 
 /**
  * Created by dili on 2016/8/3.

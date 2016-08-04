@@ -1,4 +1,4 @@
-package com.qudump.jiangedan.net.service;
+package com.qudump.jiangedan.net.service.post;
 
 import com.qudump.jiangedan.net.bean.PostDetailRespBean;
 import com.qudump.jiangedan.net.bean.PostListRespBean;

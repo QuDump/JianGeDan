@@ -11,8 +11,8 @@ public class Post {
     private String content;
     private String url;
     private String date;
-    private String thumbImg;
-    private int comment_count;
+    private List<String> thumbImg;
+    private int commentCount;
     private List<String> tags;
     private Author author;
 
@@ -56,20 +56,20 @@ public class Post {
         this.date = date;
     }
 
-    public String getThumbImg() {
+    public List<String> getThumbImg() {
         return thumbImg;
     }
 
-    public void setThumbImg(String thumbImg) {
+    public void setThumbImg(List<String> thumbImg) {
         this.thumbImg = thumbImg;
     }
 
-    public int getComment_count() {
-        return comment_count;
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    public void setComment_count(int comment_count) {
-        this.comment_count = comment_count;
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
     public List<String> getTags() {
