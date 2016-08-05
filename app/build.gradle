@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -25,6 +26,7 @@ android {
 }
 
 dependencies {
+    apt rootProject.ext.daggerCompiler
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     testCompile rootProject.ext.mockito
@@ -48,5 +50,6 @@ dependencies {
     compile rootProject.ext.rxjava
     compile rootProject.ext.rxandroid
     compile rootProject.ext.fastjson
+    compile rootProject.ext.fresco
 
 }

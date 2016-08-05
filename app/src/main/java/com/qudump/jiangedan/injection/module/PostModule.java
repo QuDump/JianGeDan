@@ -2,8 +2,6 @@ package com.qudump.jiangedan.injection.module;
 
 import com.qudump.jiangedan.cache.PostCache;
 import com.qudump.jiangedan.cache.PostCacheImpl;
-import com.qudump.jiangedan.interactor.GetPostList;
-import com.qudump.jiangedan.interactor.Impl.GetPostListImpl;
 import com.qudump.jiangedan.net.service.post.PostApiService;
 import com.qudump.jiangedan.net.service.post.PostApiServiceImpl;
 
@@ -15,11 +13,6 @@ import dagger.Provides;
  */
 @Module
 public class PostModule {
-
-    @Provides
-    GetPostList provideGetPostList(GetPostListImpl getPostList){
-        return getPostList;
-    }
 
     @Provides
     PostApiService providePostApiService(PostApiServiceImpl postApiService){

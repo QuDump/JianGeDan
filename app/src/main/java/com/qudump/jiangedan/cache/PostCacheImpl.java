@@ -2,12 +2,19 @@ package com.qudump.jiangedan.cache;
 
 import com.qudump.jiangedan.model.Post;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 /**
  * Created by dili on 2016/8/4.
  */
 public class PostCacheImpl implements PostCache {
+
+    @Inject
+    public PostCacheImpl() {
+    }
+
     @Override
     public Observable<Post> get(long id) {
         return null;

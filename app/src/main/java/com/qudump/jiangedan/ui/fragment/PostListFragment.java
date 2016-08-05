@@ -2,7 +2,6 @@ package com.qudump.jiangedan.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.injection.module.PostListFragmentModule;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.presenter.PostListContract;
 import com.qudump.jiangedan.presenter.PostListPresenter;
+import com.qudump.jiangedan.ui.BaseApplication;
 import com.qudump.jiangedan.ui.adapter.PostAdapter;
 
 import java.util.List;
@@ -40,19 +41,28 @@ public class PostListFragment extends Fragment implements PostListContract.View{
     private PostAdapter mAdapter;
     private Context mContext;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_list,container,false);
         ButterKnife.bind(this,view);
+        init();
         return view;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((BaseApplication)mContext.getApplicationContext()).buildPostComponent().plus(new PostListFragmentModule()).inject(this);
         presenter.setView(this);
-        init();
+        presenter.start();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden) {
+            presenter.destory();
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.Post;
+import com.qudump.jiangedan.ui.PostDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tv_title.setText(post.getTitle());
         holder.tv_info.setText(post.getAuthor().getNickname());
         //TODO set img and share
+//        if(post.getThumbImg().get(0).toLowerCase().endsWith("gif")){
+//            DraweeController draweeController = Fresco
+//                    .newDraweeControllerBuilder()
+//                    .setUri(post.getThumbImg().get(0))
+//                    .setAutoPlayAnimations(true)
+//                    .build();
+//            holder.img.setController(draweeController);
+//        } else {
+//            holder.img.setImageURI(Uri.parse(post.getThumbImg().get(0)));
+//        }
+        String imgUrl = post.getThumbImg().get(0);
+        if(post.getThumbImg().get(0).contains("custom")) {
+            imgUrl = post.getThumbImg().get(0).replace("custom", "medium");
+        }
+
+        holder.img.setImageURI(Uri.parse(imgUrl));
 
         setAnimation(holder.card, position);
 
@@ -76,7 +93,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return mPosts.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         @Bind(R.id.tv_title)
         TextView tv_title;
         @Bind(R.id.tv_info)
@@ -84,7 +101,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @Bind(R.id.tv_share)
         TextView tv_share;
         @Bind(R.id.img)
-        ImageView img;
+        SimpleDraweeView img;
         @Bind(R.id.card)
         CardView card;
 
@@ -93,6 +110,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             ButterKnife.bind(this,itemView);
             itemView.setOnClickListener(listener->{
                 int pos = getAdapterPosition();
+                Intent intent = new Intent(mContext, PostDetailActivity.class);
+                intent.putExtra(PostDetailActivity.EXT_POST_KEY,mPosts.get(pos));
+                mContext.startActivity(intent);
                 //TODO goto detain actvity
             });
         }

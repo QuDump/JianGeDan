@@ -1,10 +1,9 @@
 package com.qudump.jiangedan.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,9 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.ui.fragment.PostListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        replaceFragment(new PostListFragment());
     }
 
     @Override
@@ -74,22 +77,30 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_post) {
+            replaceFragment(new PostListFragment());
+        } else if (id == R.id.nav_boring_pic) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_joke) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_girls) {
+
+        } else if (id == R.id.nav_video) {
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_feedback) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fl_container, fragment);
+        transaction.commit();
     }
 }

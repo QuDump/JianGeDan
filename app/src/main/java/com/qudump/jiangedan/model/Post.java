@@ -1,11 +1,12 @@
 package com.qudump.jiangedan.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by dili on 2016/8/3.
  */
-public class Post {
+public class Post implements Serializable {
     private long id;
     private String title;
     private String content;
@@ -87,4 +88,5 @@ public class Post {
     public void setAuthor(Author author) {
         this.author = author;
     }
+
 }

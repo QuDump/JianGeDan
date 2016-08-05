@@ -35,7 +35,7 @@ public class CloudPostDataStore implements PostDataStore {
     }
 
     @Override
-    public Observable<List<Post>> postList(int page) {
+    public Observable<List<Post>> postList(final int page) {
 
         return postApiService.postList(page).map(postBeanDataMapper::transform);
     }

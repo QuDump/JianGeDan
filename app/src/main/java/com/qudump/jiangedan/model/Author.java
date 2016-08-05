@@ -1,9 +1,11 @@
 package com.qudump.jiangedan.model;
 
+import java.io.Serializable;
+
 /**
  * Created by dili on 2016/8/3.
  */
-public class Author {
+public class Author implements Serializable{
     private long id;
     private String slug;
     private String name;

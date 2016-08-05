@@ -1,7 +1,5 @@
 package com.qudump.jiangedan.net.bean.mapper;
 
-import android.support.annotation.NonNull;
-
 import com.qudump.jiangedan.model.Author;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.net.bean.AuthorBean;
@@ -30,16 +28,16 @@ public class PostBeanDataMapper {
             post.setDate(postBean.getDate());
             post.setCommentCount(postBean.getComment_count());
             post.setThumbImg(postBean.getCustom_fields().getThumb_c());
-            post.setAuthor(getAuthor(postBean.getAuthorBean()));
+            post.setAuthor(getAuthor(postBean.getAuthor()));
             post.setTitle(postBean.getTitle());
             post.setUrl(postBean.getUrl());
+            post.setContent(postBean.getContent());
 
         }
 
         return post;
     }
 
-    @NonNull
     private Author getAuthor(AuthorBean item) {
         Author author = new Author();
         author.setId(item.getId());

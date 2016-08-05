@@ -11,8 +11,8 @@ public class PostBean {
     private String url;
     private String title;
     private String date;
-    private List<TagBean> tagBeen;
-    private AuthorBean authorBean;
+    private List<TagBean> tags;
+    private AuthorBean author;
     private int comment_count;
     private CustomField custom_fields;
 
@@ -56,20 +56,20 @@ public class PostBean {
         this.date = date;
     }
 
-    public List<TagBean> getTagBeen() {
-        return tagBeen;
+    public List<TagBean> getTags() {
+        return tags;
     }
 
-    public void setTagBeen(List<TagBean> tagBeen) {
-        this.tagBeen = tagBeen;
+    public void setTags(List<TagBean> tags) {
+        this.tags = tags;
     }
 
-    public AuthorBean getAuthorBean() {
-        return authorBean;
+    public AuthorBean getAuthor() {
+        return author;
     }
 
-    public void setAuthorBean(AuthorBean authorBean) {
-        this.authorBean = authorBean;
+    public void setAuthor(AuthorBean author) {
+        this.author = author;
     }
 
     public int getComment_count() {

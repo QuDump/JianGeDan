@@ -6,6 +6,8 @@ import com.qudump.jiangedan.repository.post.datasource.PostDataStoreFactory;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 /**
@@ -15,6 +17,7 @@ public class PostRepository {
 
     private PostDataStoreFactory postDataStoreFactory;
 
+    @Inject
     public PostRepository(PostDataStoreFactory postDataStoreFactory) {
         this.postDataStoreFactory = postDataStoreFactory;
     }
@@ -26,7 +29,8 @@ public class PostRepository {
 
     public Observable<Post> post(long postId) {
         PostDataStore postDataStore = postDataStoreFactory.create(postId);
-        return postDataStore.postDetail(postId);
+        Observable<Post> postObservable = postDataStore.postDetail(postId);
+        return postObservable;
     }
 
 }
