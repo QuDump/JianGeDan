@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.injection.module.PostDetailActivityModule;
@@ -26,7 +27,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
     public static final String EXT_POST_KEY = "ext.post";
 
-    private Post mPost;
+    private Post mPost = new Post();
 
     @Inject
     PostDetailPresenter presenter;
@@ -47,7 +48,12 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
     @Override
     public void renderView(Post post) {
-        webView.loadData(getHtml(post), "text/html", "utf-8");
+        webView.loadDataWithBaseURL("",getHtml(post), "text/html", "utf-8","");
+    }
+
+    @Override
+    public void showErrMsg(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
     private static String getHtml(Post post) {
         final StringBuilder sb = new StringBuilder();
         sb.append("<!DOCTYPE html>");
-        sb.append("<html dir=\"ltr\" lang=\"zh\">");
+        sb.append("<html dir=\"ltr\" lang=\"utf-8\">");
         sb.append("<head>");
         sb.append("<meta name=\"viewport\" content=\"width=100%; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\" />");
         sb.append("<link rel=\"stylesheet\" href='file:///android_asset/style.css' type=\"text/css\" media=\"screen\" />");

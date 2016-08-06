@@ -54,7 +54,7 @@ public class PostApiServiceImpl implements PostApiService {
     }
 
     @Override
-    public Observable<PostBean> postDetailById(long id) {
+    public Observable<Post> postDetailById(long id) {
         String api = "get_post";
         String param = "content";
 
@@ -66,13 +66,13 @@ public class PostApiServiceImpl implements PostApiService {
                         return Observable.error(new NetworkConnectionException());
                     }
                     return Observable.just(resp.getPost());
+                })
+                .map(resp->{
+                    Post post = new Post();
+                    post.setId(id);
+                    post.setContent(resp.getContent());
+                    return post;
                 });
-//                .map(resp->{
-//                    Post post = new Post();
-//                    post.setId(id);
-//                    post.setContent(resp.getPost().getContent());
-//                    return post;
-//                });
     }
 
     private Post mapBeanToModel(PostBean item) {

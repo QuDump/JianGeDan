@@ -14,7 +14,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
 
     private GetPostDetail getPostDetail;
     private PostDetailContract.View view;
-    private Post mPost;
+    private Post mPost =new Post();
 
     @Inject
     public PostDetailPresenter(GetPostDetail getPostDetail) {
@@ -46,12 +46,12 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
 
         @Override
         public void onCompleted() {
-
+            view.showErrMsg("load complete");
         }
 
         @Override
         public void onError(Throwable e) {
-
+            view.showErrMsg("network error");
         }
 
         @Override

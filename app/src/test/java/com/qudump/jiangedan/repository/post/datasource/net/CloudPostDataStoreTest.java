@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.repository.post.datasource.net;
 
 import com.qudump.jiangedan.cache.PostCache;
+import com.qudump.jiangedan.net.bean.mapper.PostBeanDataMapper;
 import com.qudump.jiangedan.net.service.post.PostApiService;
 
 import org.junit.Before;
@@ -19,6 +20,8 @@ public class CloudPostDataStoreTest {
     PostApiService postApiService;
     @Mock
     PostCache postCache;
+    @Mock
+    PostBeanDataMapper mapper;
 
     private CloudPostDataStore cloudPostDataStore;
     private static long FAKE_POST_ID = 12345;
@@ -26,7 +29,7 @@ public class CloudPostDataStoreTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        cloudPostDataStore = new CloudPostDataStore(postApiService,postCache);
+        cloudPostDataStore = new CloudPostDataStore(postApiService,postCache,mapper);
     }
 
     @Test

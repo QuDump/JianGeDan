@@ -36,7 +36,7 @@ public class PostDataStoreFactoryTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        postDataStoreFactory = new PostDataStoreFactory(mockPostCache,mockRetrofit);
+        postDataStoreFactory = new PostDataStoreFactory(mockPostCache);
     }
 
     @Test

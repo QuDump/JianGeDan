@@ -43,6 +43,6 @@ public class CloudPostDataStore implements PostDataStore {
     @Override
     public Observable<Post> postDetail(final long id) {
 
-        return postApiService.postDetailById(id).map(postBeanDataMapper::transform).doOnNext(saveToCacheAction);
+        return postApiService.postDetailById(id).doOnNext(saveToCacheAction);
     }
 }

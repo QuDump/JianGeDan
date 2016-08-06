@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.net.service.post;
 
+import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.net.bean.PostBean;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface PostApiService {
     String BASE_URL = "";
 
     Observable<List<PostBean>> postList(int page);
-    Observable<PostBean> postDetailById(long id);
+    Observable<Post> postDetailById(long id);
 }

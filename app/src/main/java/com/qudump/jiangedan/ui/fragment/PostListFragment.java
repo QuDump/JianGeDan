@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.injection.module.PostListFragmentModule;
@@ -91,6 +92,11 @@ public class PostListFragment extends Fragment implements PostListContract.View{
     @Override
     public void renderView(List<Post> posts) {
         mAdapter.setData(posts);
+    }
+
+    @Override
+    public void showErrMsg(String msg) {
+        Toast.makeText(mContext,msg,Toast.LENGTH_SHORT);
     }
 
     @Override

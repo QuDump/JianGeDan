@@ -5,4 +5,5 @@ package com.qudump.jiangedan.presenter;
  */
 public interface BaseView<T> {
     void setPresenter(T presenter);
+    void showErrMsg(String msg);
 }
