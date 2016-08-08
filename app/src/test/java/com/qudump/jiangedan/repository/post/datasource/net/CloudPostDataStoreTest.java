@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.repository.post.datasource.net;
 
+import com.qudump.jiangedan.cache.PostCache;
 import com.qudump.jiangedan.net.bean.mapper.PostBeanDataMapper;
 import com.qudump.jiangedan.net.service.post.PostApiService;
 

@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.repository.post.cache;
 
+import com.qudump.jiangedan.cache.PostCache;
 import com.qudump.jiangedan.repository.post.datasource.cache.DiskPostDataStore;
 
 import org.junit.Before;

@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.repository.datasource;
 
+import com.qudump.jiangedan.cache.PostCache;
 import com.qudump.jiangedan.net.service.post.PostApiService;
 import com.qudump.jiangedan.repository.post.datasource.PostDataStore;
 import com.qudump.jiangedan.repository.post.datasource.PostDataStoreFactory;
