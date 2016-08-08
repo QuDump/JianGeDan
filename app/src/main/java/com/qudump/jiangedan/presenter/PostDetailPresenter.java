@@ -38,7 +38,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
     }
 
     @Override
-    public void destory() {
+    public void destroy() {
         getPostDetail.unsubscribe();
     }
 

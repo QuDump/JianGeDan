@@ -6,5 +6,5 @@ package com.qudump.jiangedan.presenter;
 public interface BasePresenter<T> {
     void setView(T view);
     void start();
-    void destory();
+    void destroy();
 }

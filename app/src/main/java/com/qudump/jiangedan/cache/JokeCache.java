@@ -1,27 +1,27 @@
 package com.qudump.jiangedan.cache;
 
-import com.qudump.jiangedan.model.Post;
+import com.qudump.jiangedan.model.Joke;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 
 /**
- * Created by dili on 2016/8/4.
+ * Created by dili on 2016/8/8.
  */
-public class PostCacheImpl implements PostCache {
+public class JokeCache implements BaseCache<Joke> {
 
     @Inject
-    public PostCacheImpl() {
+    public JokeCache() {
     }
 
     @Override
-    public Observable<Post> get(long id) {
+    public Observable<Joke> get(long id) {
         return null;
     }
 
     @Override
-    public void put(Post post) {
+    public void put(Joke post) {
 
     }
 

@@ -31,7 +31,7 @@ public class PostListPresenter implements PostListContract.Presenter {
     }
 
     @Override
-    public void destory() {
+    public void destroy() {
         getPostList.unsubscribe();
     }
 

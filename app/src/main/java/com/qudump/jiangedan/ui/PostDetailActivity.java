@@ -1,7 +1,6 @@
 package com.qudump.jiangedan.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -33,7 +32,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
     PostDetailPresenter presenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
         ButterKnife.bind(this);

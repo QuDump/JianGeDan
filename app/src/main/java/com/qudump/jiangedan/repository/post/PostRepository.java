@@ -29,8 +29,7 @@ public class PostRepository {
 
     public Observable<Post> post(long postId) {
         PostDataStore postDataStore = postDataStoreFactory.create(postId);
-        Observable<Post> postObservable = postDataStore.postDetail(postId);
-        return postObservable;
+        return postDataStore.postDetail(postId);
     }
 
 }

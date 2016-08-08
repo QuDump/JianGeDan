@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.injection.component;
 
 import com.qudump.jiangedan.injection.module.AppModule;
+import com.qudump.jiangedan.injection.module.JokeModule;
 import com.qudump.jiangedan.injection.module.PostModule;
 
 import javax.inject.Singleton;
@@ -14,4 +15,5 @@ import dagger.Component;
 @Component(modules = AppModule.class)
 public interface AppComponent {
     PostComponent plus(PostModule postModule);
+    JokeComponent plus(JokeModule jokeModule);
 }

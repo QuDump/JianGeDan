@@ -1,8 +1,6 @@
 package com.qudump.jiangedan.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +14,6 @@ import com.qudump.jiangedan.injection.module.PostListFragmentModule;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.presenter.PostListContract;
 import com.qudump.jiangedan.presenter.PostListPresenter;
-import com.qudump.jiangedan.ui.BaseApplication;
 import com.qudump.jiangedan.ui.adapter.PostAdapter;
 
 import java.util.List;
@@ -29,7 +26,7 @@ import butterknife.ButterKnife;
 /**
  * Created by dili on 2016/8/3.
  */
-public class PostListFragment extends Fragment implements PostListContract.View{
+public class PostListFragment extends AbstractBaseFragment implements PostListContract.View{
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -40,7 +37,6 @@ public class PostListFragment extends Fragment implements PostListContract.View{
     PostListPresenter presenter;
 
     private PostAdapter mAdapter;
-    private Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,9 +47,16 @@ public class PostListFragment extends Fragment implements PostListContract.View{
     }
 
     @Override
+    void initDagger() {
+        getApplication()
+                .buildPostComponent()
+                .plus(new PostListFragmentModule())
+                .inject(this);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((BaseApplication)mContext.getApplicationContext()).buildPostComponent().plus(new PostListFragmentModule()).inject(this);
         presenter.setView(this);
         presenter.start();
     }
@@ -62,14 +65,8 @@ public class PostListFragment extends Fragment implements PostListContract.View{
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if(hidden) {
-            presenter.destory();
+            presenter.destroy();
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
     }
 
     private void init(){
@@ -83,8 +80,8 @@ public class PostListFragment extends Fragment implements PostListContract.View{
                 presenter.loadRecent();
             }
         });
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mAdapter = new PostAdapter(mContext);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext()));
+        mAdapter = new PostAdapter(getActivityContext());
         mRecyclerView.setAdapter(mAdapter);
 
     }
@@ -96,7 +93,7 @@ public class PostListFragment extends Fragment implements PostListContract.View{
 
     @Override
     public void showErrMsg(String msg) {
-        Toast.makeText(mContext,msg,Toast.LENGTH_SHORT);
+        Toast.makeText(getActivityContext(),msg,Toast.LENGTH_SHORT);
     }
 
     @Override

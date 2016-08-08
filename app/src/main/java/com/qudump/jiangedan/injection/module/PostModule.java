@@ -1,7 +1,5 @@
 package com.qudump.jiangedan.injection.module;
 
-import com.qudump.jiangedan.cache.PostCache;
-import com.qudump.jiangedan.cache.PostCacheImpl;
 import com.qudump.jiangedan.net.service.post.PostApiService;
 import com.qudump.jiangedan.net.service.post.PostApiServiceImpl;
 
@@ -19,8 +17,4 @@ public class PostModule {
         return postApiService;
     }
 
-    @Provides
-    PostCache providePostCache(PostCacheImpl postCache){
-        return postCache;
-    }
 }
