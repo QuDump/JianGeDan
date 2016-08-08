@@ -5,9 +5,11 @@ import android.support.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.qudump.jiangedan.injection.component.AppComponent;
 import com.qudump.jiangedan.injection.component.DaggerAppComponent;
+import com.qudump.jiangedan.injection.component.GirlPicComponent;
 import com.qudump.jiangedan.injection.component.JokeComponent;
 import com.qudump.jiangedan.injection.component.PostComponent;
 import com.qudump.jiangedan.injection.module.AppModule;
+import com.qudump.jiangedan.injection.module.GirlPicModule;
 import com.qudump.jiangedan.injection.module.JokeModule;
 import com.qudump.jiangedan.injection.module.PostModule;
 
@@ -18,6 +20,7 @@ public class BaseApplication extends MultiDexApplication {
     private AppComponent appComponent;
     private PostComponent postComponent;
     private JokeComponent jokeComponent;
+    private GirlPicComponent girlPicComponent;
 
     @Override
     public void onCreate() {
@@ -51,5 +54,14 @@ public class BaseApplication extends MultiDexApplication {
 
     public void releaseJokeComponent() {
         jokeComponent = null;
+    }
+
+    public GirlPicComponent buildGirlPicComponent(){
+        girlPicComponent = appComponent.plus(new GirlPicModule());
+        return girlPicComponent;
+    }
+
+    public void releaseGirlPicComponent(){
+        girlPicComponent = null;
     }
 }

@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.injection.component;
 
 import com.qudump.jiangedan.injection.module.AppModule;
+import com.qudump.jiangedan.injection.module.GirlPicModule;
 import com.qudump.jiangedan.injection.module.JokeModule;
 import com.qudump.jiangedan.injection.module.PostModule;
 
@@ -16,4 +17,5 @@ import dagger.Component;
 public interface AppComponent {
     PostComponent plus(PostModule postModule);
     JokeComponent plus(JokeModule jokeModule);
+    GirlPicComponent plus(GirlPicModule girlPicModule);
 }

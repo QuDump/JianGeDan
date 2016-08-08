@@ -26,11 +26,11 @@ public class JokeDataStoreFactory implements BaseDataStoreFactory<JokeDataStore>
 
     @Override
     public JokeDataStore create(long id) {
-        JokeDataStore jokeDataStore = null;
+        JokeDataStore jokeDataStore;
         if(!jokeCache.isExpired() && jokeCache.isCached(id)) {
             jokeDataStore = lazyDiskJokeDataStore.get();
         } else {
-            jokeDataStore = create(id);
+            jokeDataStore = createCloudDataStore();
         }
         return jokeDataStore;
     }

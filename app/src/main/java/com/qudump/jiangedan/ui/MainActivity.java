@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.ui.fragment.GirlPicListFragment;
 import com.qudump.jiangedan.ui.fragment.JokeListFragment;
 import com.qudump.jiangedan.ui.fragment.PostListFragment;
 
@@ -84,9 +85,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_joke) {
             replaceFragment(new JokeListFragment());
-
         } else if (id == R.id.nav_girls) {
-
+            replaceFragment(new GirlPicListFragment());
         } else if (id == R.id.nav_video) {
 
         } else if (id == R.id.nav_share) {

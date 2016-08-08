@@ -52,16 +52,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tv_title.setText(post.getTitle());
         holder.tv_info.setText(post.getAuthor().getNickname());
         //TODO set img and share
-//        if(post.getThumbImg().get(0).toLowerCase().endsWith("gif")){
-//            DraweeController draweeController = Fresco
-//                    .newDraweeControllerBuilder()
-//                    .setUri(post.getThumbImg().get(0))
-//                    .setAutoPlayAnimations(true)
-//                    .build();
-//            holder.img.setController(draweeController);
-//        } else {
-//            holder.img.setImageURI(Uri.parse(post.getThumbImg().get(0)));
-//        }
+
         String imgUrl = post.getThumbImg().get(0);
         if(post.getThumbImg().get(0).contains("custom")) {
             imgUrl = post.getThumbImg().get(0).replace("custom", "medium");

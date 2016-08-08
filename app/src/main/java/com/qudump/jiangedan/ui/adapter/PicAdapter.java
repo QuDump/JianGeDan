@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,8 +11,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
-import com.qudump.jiangedan.model.Joke;
+import com.qudump.jiangedan.model.GirlPic;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import java.util.ArrayList;
@@ -21,42 +25,53 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by qidong on 2016/8/6.
+ * Created by dili on 2016/8/8.
  */
-public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
+public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<Joke> mJokes = new ArrayList<>();
+    private List<GirlPic> picList = new ArrayList<>();
     private int lastPosition = -1;
 
-    public JokeAdapter(Context mContext) {
-        this.mContext = mContext;
+    public PicAdapter(Context context) {
+        this.mContext = context;
     }
 
-    public void setData(List<Joke> jokes){
-        mJokes = jokes;
+    public void setData(List<GirlPic> pics) {
+        picList = pics;
         notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_joke,parent,false));
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_pic_card,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Joke joke = mJokes.get(position);
-        holder.tvAuther.setText(joke.getAuthorName());
-        holder.tvContent.setText(joke.getContent());
-        holder.tvPostTime.setText(String2TimeUtil.dateString2GoodExperienceFormat(joke.getDate()));
+    public void onBindViewHolder(ViewHolder viewHolder, int pos) {
+        final GirlPic item = picList.get(pos);
 
-        setAnimation(holder.card, position);
+        if(item.getPic().toLowerCase().endsWith("gif")){
+            DraweeController draweeController = Fresco
+                    .newDraweeControllerBuilder()
+                    .setUri(item.getPic())
+                    .setAutoPlayAnimations(true)
+                    .build();
+            viewHolder.img.setController(draweeController);
+        } else {
+            viewHolder.img.setImageURI(Uri.parse(item.getPic()));
+        }
 
+        //viewHolder.img.setImageURI(Uri.parse(item.getPic()));
+        viewHolder.tvAuthor.setText(item.getAuthorName());
+        viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
+
+        setAnimation(viewHolder.card,pos);
     }
 
     @Override
     public int getItemCount() {
-        return mJokes.size();
+        return picList.size();
     }
 
     @Override
@@ -74,13 +89,14 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
         }
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_content)
-        TextView tvContent;
+        @Bind(R.id.img)
+        SimpleDraweeView img;
         @Bind(R.id.tv_info)
-        TextView tvAuther;
-        @Bind(R.id.tv_time)
-        TextView tvPostTime;
+        TextView tvAuthor;
+        @Bind(R.id.tv_date)
+        TextView tvDate;
         @Bind(R.id.card)
         CardView card;
 
@@ -89,6 +105,4 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
             ButterKnife.bind(this,itemView);
         }
     }
-
-
 }
