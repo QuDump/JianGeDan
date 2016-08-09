@@ -13,7 +13,7 @@ import rx.Observable;
 /**
  * Created by dili on 2016/8/5.
  */
-public class GetPostDetailImpl extends UseCase implements GetPostDetail {
+public class GetPostDetailImpl extends UseCase<Post> implements GetPostDetail {
 
     private long id;
     private PostRepository postRepository;

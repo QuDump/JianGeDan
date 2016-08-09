@@ -15,7 +15,7 @@ import rx.Observable;
 /**
  * Created by dili on 2016/8/8.
  */
-public class GetGirlPicListImpl extends UseCase implements GetGirlPicList {
+public class GetGirlPicListImpl extends UseCase<List<GirlPic>> implements GetGirlPicList {
     private GirlPicRepository repository;
     private int page;
 

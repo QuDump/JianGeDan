@@ -13,9 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.ui.fragment.BoringPicListFragment;
 import com.qudump.jiangedan.ui.fragment.GirlPicListFragment;
 import com.qudump.jiangedan.ui.fragment.JokeListFragment;
 import com.qudump.jiangedan.ui.fragment.PostListFragment;
+import com.qudump.jiangedan.ui.fragment.VideoListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,13 +84,13 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_post) {
             replaceFragment(new PostListFragment());
         } else if (id == R.id.nav_boring_pic) {
-
+            replaceFragment(new BoringPicListFragment());
         } else if (id == R.id.nav_joke) {
             replaceFragment(new JokeListFragment());
         } else if (id == R.id.nav_girls) {
             replaceFragment(new GirlPicListFragment());
         } else if (id == R.id.nav_video) {
-
+            replaceFragment(new VideoListFragment());
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_feedback) {

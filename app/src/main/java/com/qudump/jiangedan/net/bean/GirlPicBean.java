@@ -12,8 +12,18 @@ public class GirlPicBean {
     private String comment_author_email;
     private List<String> pics;
     private String comment_date;
+
     private int vote_negative;
     private int vote_positive;
+    private int comment_approved;
+
+    public int getComment_approved() {
+        return comment_approved;
+    }
+
+    public void setComment_approved(int comment_approved) {
+        this.comment_approved = comment_approved;
+    }
 
     public long getComment_post_ID() {
         return comment_post_ID;

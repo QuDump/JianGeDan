@@ -11,11 +11,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
-import com.qudump.jiangedan.model.GirlPic;
+import com.qudump.jiangedan.model.LittleVideo;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import java.util.ArrayList;
@@ -25,46 +23,46 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by dili on 2016/8/8.
+ * Created by dili on 2016/8/9.
  */
-public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
+public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
 
     private Context mContext;
-    private List<GirlPic> picList = new ArrayList<>();
+    private List<LittleVideo> videoList = new ArrayList<>();
     private int lastPosition = -1;
 
-    public PicAdapter(Context context) {
+    public VideoAdapter(Context context) {
         this.mContext = context;
     }
 
-    public void setData(List<GirlPic> pics) {
-        picList = pics;
+    public void setData(List<LittleVideo> pics) {
+        videoList = pics;
         notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_pic_card,parent,false));
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_video_card,parent,false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int pos) {
-        final GirlPic item = picList.get(pos);
+        final LittleVideo item = videoList.get(pos);
 
-        if(item.getPics().get(0).toLowerCase().endsWith("gif")){
-            DraweeController draweeController = Fresco
-                    .newDraweeControllerBuilder()
-                    .setUri(item.getPics().get(0))
-                    .setAutoPlayAnimations(true)
-                    .build();
-            viewHolder.img.setController(draweeController);
-        } else {
-            viewHolder.img.setImageURI(Uri.parse(item.getPics().get(0)));
-        }
+//        if(item.getPics().get(0).toLowerCase().endsWith("gif")){
+//            DraweeController draweeController = Fresco
+//                    .newDraweeControllerBuilder()
+//                    .setUri(item.getPics().get(0))
+//                    .setAutoPlayAnimations(true)
+//                    .build();
+//            viewHolder.img.setController(draweeController);
+//        } else {
+//            viewHolder.img.setImageURI(Uri.parse(item.getPics().get(0)));
+//        }
 
-        //viewHolder.img.setImageURI(Uri.parse(item.getPic()));
-
-
+        viewHolder.img.setImageURI(Uri.parse(item.getThumbNail()));
+        viewHolder.tvTitle.setText(item.getTitle());
+        viewHolder.tvDesc.setText(item.getDescription());
         viewHolder.tvAuthor.setText(item.getAuthorName());
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
 
@@ -73,7 +71,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return picList.size();
+        return videoList.size();
     }
 
     @Override
@@ -95,10 +93,14 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.img)
         SimpleDraweeView img;
-        @Bind(R.id.tv_info)
+        @Bind(R.id.tv_author)
         TextView tvAuthor;
-        @Bind(R.id.tv_date)
+        @Bind(R.id.tv_time)
         TextView tvDate;
+        @Bind(R.id.tv_desc)
+        TextView tvDesc;
+        @Bind(R.id.tv_title)
+        TextView tvTitle;
         @Bind(R.id.card)
         CardView card;
 

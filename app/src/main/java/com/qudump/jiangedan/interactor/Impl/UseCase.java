@@ -13,7 +13,7 @@ import rx.subscriptions.Subscriptions;
 /**
  * Created by dili on 2016/8/3.
  */
-public abstract class UseCase implements Interactor {
+public abstract class UseCase<T> implements Interactor {
 
     private final ThreadExecutor threadExecutor;
     private final PostExecutionThread postExecutionThread;
@@ -26,7 +26,7 @@ public abstract class UseCase implements Interactor {
         this.postExecutionThread = postExecutionThread;
     }
 
-    protected abstract Observable buildUseCaseObservable();
+    protected abstract Observable<T> buildUseCaseObservable();
 
     @Override
     public void execute(Subscriber UseCaseSubscriber) {

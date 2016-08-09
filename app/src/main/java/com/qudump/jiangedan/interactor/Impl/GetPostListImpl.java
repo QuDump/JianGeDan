@@ -15,7 +15,7 @@ import rx.Observable;
 /**
  * Created by dili on 2016/8/3.
  */
-public class GetPostListImpl extends UseCase implements GetPostList {
+public class GetPostListImpl extends UseCase<List<Post>> implements GetPostList {
 
     private PostRepository postRepository;
     private int page;

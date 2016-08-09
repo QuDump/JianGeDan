@@ -1,9 +1,7 @@
 package com.qudump.jiangedan.net.bean.mapper;
 
 import com.qudump.jiangedan.model.BoringPic;
-import com.qudump.jiangedan.model.GirlPic;
 import com.qudump.jiangedan.net.bean.BoringPicBean;
-import com.qudump.jiangedan.net.bean.GirlPicBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,8 @@ public class BoringPicBeanMapper {
             boringPic.setDate(boringPicBean.getComment_date());
             boringPic.setLikeCounts(boringPicBean.getVote_positive());
             boringPic.setDislikeCounts(boringPicBean.getVote_negative());
-            boringPic.setPic(boringPicBean.getPics().get(0));
+            boringPic.setPics(boringPicBean.getPics());
+            boringPic.setTitle(boringPicBean.getText_content());
         }
 
         return boringPic;

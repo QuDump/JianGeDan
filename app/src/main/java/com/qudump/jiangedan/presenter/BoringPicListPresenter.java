@@ -70,6 +70,7 @@ public class BoringPicListPresenter implements BoringPicContract.Presenter {
             }
             mBoringPics.addAll(boringPics);
             view.renderView(mBoringPics);
+            view.stopRefresh();
         }
     }
 }

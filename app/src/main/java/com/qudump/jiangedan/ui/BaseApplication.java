@@ -9,11 +9,13 @@ import com.qudump.jiangedan.injection.component.DaggerAppComponent;
 import com.qudump.jiangedan.injection.component.GirlPicComponent;
 import com.qudump.jiangedan.injection.component.JokeComponent;
 import com.qudump.jiangedan.injection.component.PostComponent;
+import com.qudump.jiangedan.injection.component.VideoComponent;
 import com.qudump.jiangedan.injection.module.AppModule;
 import com.qudump.jiangedan.injection.module.BoringPicModule;
 import com.qudump.jiangedan.injection.module.GirlPicModule;
 import com.qudump.jiangedan.injection.module.JokeModule;
 import com.qudump.jiangedan.injection.module.PostModule;
+import com.qudump.jiangedan.injection.module.VideoModule;
 
 /**
  * Created by dili on 2016/8/3.
@@ -24,6 +26,7 @@ public class BaseApplication extends MultiDexApplication {
     private JokeComponent jokeComponent;
     private GirlPicComponent girlPicComponent;
     private BoringPicComponent boringPicComponent;
+    private VideoComponent videoComponent;
 
     @Override
     public void onCreate() {
@@ -75,5 +78,14 @@ public class BaseApplication extends MultiDexApplication {
 
     public void releasePicComponent(){
         boringPicComponent = null;
+    }
+
+    public VideoComponent buildVideoComponent(){
+        videoComponent = appComponent.plus(new VideoModule());
+        return videoComponent;
+    }
+
+    public void releaseVideoComponent(){
+        videoComponent = null;
     }
 }

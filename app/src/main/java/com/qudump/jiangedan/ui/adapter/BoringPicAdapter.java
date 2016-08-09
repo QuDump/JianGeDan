@@ -15,7 +15,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
-import com.qudump.jiangedan.model.GirlPic;
+import com.qudump.jiangedan.model.BoringPic;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import java.util.ArrayList;
@@ -25,19 +25,19 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by dili on 2016/8/8.
+ * Created by dili on 2016/8/9.
  */
-public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
+public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.ViewHolder>{
 
     private Context mContext;
-    private List<GirlPic> picList = new ArrayList<>();
+    private List<BoringPic> picList = new ArrayList<>();
     private int lastPosition = -1;
 
-    public PicAdapter(Context context) {
+    public BoringPicAdapter(Context context) {
         this.mContext = context;
     }
 
-    public void setData(List<GirlPic> pics) {
+    public void setData(List<BoringPic> pics) {
         picList = pics;
         notifyDataSetChanged();
     }
@@ -49,7 +49,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int pos) {
-        final GirlPic item = picList.get(pos);
+        final BoringPic item = picList.get(pos);
 
         if(item.getPics().get(0).toLowerCase().endsWith("gif")){
             DraweeController draweeController = Fresco

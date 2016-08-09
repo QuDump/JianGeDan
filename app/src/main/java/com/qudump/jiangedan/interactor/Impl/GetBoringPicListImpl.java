@@ -15,7 +15,7 @@ import rx.Observable;
 /**
  * Created by qidong on 2016/8/8.
  */
-public class GetBoringPicListImpl extends UseCase implements GetBoringPicList {
+public class GetBoringPicListImpl extends UseCase<List<BoringPic>> implements GetBoringPicList {
     private BoringPicRepository repository;
     private int page;
 
@@ -33,6 +33,7 @@ public class GetBoringPicListImpl extends UseCase implements GetBoringPicList {
 
     @Override
     protected Observable<List<BoringPic>> buildUseCaseObservable() {
-        return repository.boringPics(page);
+        Observable<List<BoringPic>> observable = repository.boringPics(page);
+        return observable;
     }
 }

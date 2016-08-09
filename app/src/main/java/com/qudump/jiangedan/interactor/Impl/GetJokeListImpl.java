@@ -15,7 +15,7 @@ import rx.Observable;
 /**
  * Created by dili on 2016/8/8.
  */
-public class GetJokeListImpl extends UseCase implements GetJokeList {
+public class GetJokeListImpl extends UseCase<List<Joke>> implements GetJokeList {
 
     private JokeRepository jokeRepository;
     private int page;

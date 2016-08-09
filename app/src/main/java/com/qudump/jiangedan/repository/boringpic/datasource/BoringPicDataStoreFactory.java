@@ -38,6 +38,6 @@ public class BoringPicDataStoreFactory implements BaseDataStoreFactory<BoringPic
 
     @Override
     public BoringPicDataStore createCloudDataStore() {
-        return lazyDiskBoringPicDataStore.get();
+        return lazyCloudBoringPicDataStore.get();
     }
 }

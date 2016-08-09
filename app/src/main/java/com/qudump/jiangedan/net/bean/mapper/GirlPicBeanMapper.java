@@ -28,7 +28,7 @@ public class GirlPicBeanMapper {
             girlPic.setDate(girlPicBean.getComment_date());
             girlPic.setLikeCounts(girlPicBean.getVote_positive());
             girlPic.setDislikeCounts(girlPicBean.getVote_negative());
-            girlPic.setPic(girlPicBean.getPics().get(0));
+            girlPic.setPics(girlPicBean.getPics());
         }
 
         return girlPic;

@@ -5,6 +5,7 @@ import com.qudump.jiangedan.injection.module.BoringPicModule;
 import com.qudump.jiangedan.injection.module.GirlPicModule;
 import com.qudump.jiangedan.injection.module.JokeModule;
 import com.qudump.jiangedan.injection.module.PostModule;
+import com.qudump.jiangedan.injection.module.VideoModule;
 
 import javax.inject.Singleton;
 
@@ -20,4 +21,5 @@ public interface AppComponent {
     JokeComponent plus(JokeModule jokeModule);
     GirlPicComponent plus(GirlPicModule girlPicModule);
     BoringPicComponent plus(BoringPicModule boringPicModule);
+    VideoComponent plus(VideoModule videoModule);
 }
