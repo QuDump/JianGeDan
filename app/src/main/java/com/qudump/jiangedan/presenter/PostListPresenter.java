@@ -19,6 +19,7 @@ public class PostListPresenter implements PostListContract.Presenter {
     private PostListContract.View view;
     private boolean isRefresh = true;
     private List<Post> mPosts = new ArrayList<>();
+    private int currentPage = 1;
 
     @Inject
     public PostListPresenter(GetPostList getPostList) {
@@ -45,7 +46,14 @@ public class PostListPresenter implements PostListContract.Presenter {
 
     @Override
     public void loadRecent() {
-        loadPosts(1);
+        currentPage = 1;
+        loadPosts(currentPage);
+    }
+
+    @Override
+    public void loadNextPage() {
+        currentPage++;
+        loadPosts(currentPage);
     }
 
     @Override

@@ -16,6 +16,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -41,6 +42,7 @@ def hamcrestVersion = '1.3'
 def robolectricVersion = '3.1'
 def shadowMultiDexVersion = '3.0'
 def frescoVersion = '0.12.0'
+def IRecyclerViewVersion = '0.0.3'
 
 project.ext {
 
@@ -72,5 +74,6 @@ project.ext {
     shadowMultiDex = "org.robolectric:shadows-multidex:${shadowMultiDexVersion}"
     fresco = "com.facebook.fresco:fresco:$frescoVersion"
     frescoGIF = "com.facebook.fresco:animated-gif:$frescoVersion"
+    IRecyclerView = "com.github.Aspsine:IRecyclerView:${IRecyclerViewVersion}"
 }
 

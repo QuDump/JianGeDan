@@ -52,5 +52,6 @@ dependencies {
     compile rootProject.ext.fastjson
     compile rootProject.ext.fresco
     compile rootProject.ext.frescoGIF
+    compile rootProject.ext.IRecyclerView
 
 }

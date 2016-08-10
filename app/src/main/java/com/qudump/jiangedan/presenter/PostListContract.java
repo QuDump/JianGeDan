@@ -14,6 +14,7 @@ public interface PostListContract {
     }
     interface Presenter extends BasePresenter<View>{
         void loadPosts(int page);
+        void loadNextPage();
         void loadRecent();
     }
 }
