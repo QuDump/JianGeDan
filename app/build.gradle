@@ -51,5 +51,6 @@ dependencies {
     compile rootProject.ext.rxandroid
     compile rootProject.ext.fastjson
     compile rootProject.ext.fresco
+    compile rootProject.ext.frescoGIF
 
 }

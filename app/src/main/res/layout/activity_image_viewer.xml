@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/background_dark"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qudump.jiangedan.ui.widget.WrapContentDraweeView
+        android:id="@+id/img"
+        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        fresco:placeholderImage="@mipmap/ic_loading_large"
+        fresco:failureImage="@mipmap/ic_loading_large"/>
+
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.BoringPic;
+import com.qudump.jiangedan.ui.PicViewerActivity;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import java.util.ArrayList;
@@ -51,10 +53,10 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
     public void onBindViewHolder(ViewHolder viewHolder, int pos) {
         final BoringPic item = picList.get(pos);
 
-        if(item.getPics().get(0).toLowerCase().endsWith("gif")){
+        if(item.getPics().get(0).toLowerCase().endsWith("gif")) {
             DraweeController draweeController = Fresco
                     .newDraweeControllerBuilder()
-                    .setUri(item.getPics().get(0))
+                    .setUri(Uri.parse(item.getPics().get(0)))
                     .setAutoPlayAnimations(true)
                     .build();
             viewHolder.img.setController(draweeController);
@@ -62,13 +64,15 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
             viewHolder.img.setImageURI(Uri.parse(item.getPics().get(0)));
         }
 
-        //viewHolder.img.setImageURI(Uri.parse(item.getPic()));
-
-
         viewHolder.tvAuthor.setText(item.getAuthorName());
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
 
         setAnimation(viewHolder.card,pos);
+        viewHolder.card.setOnClickListener(listener->{
+            Intent intent = new Intent(mContext, PicViewerActivity.class);
+            intent.putExtra(PicViewerActivity.EXT_KEY_IMG_URL,item.getPics().get(0));
+            mContext.startActivity(intent);
+        });
     }
 
     @Override
@@ -90,7 +94,6 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
             lastPosition = position;
         }
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.img)
