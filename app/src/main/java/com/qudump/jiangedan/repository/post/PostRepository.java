@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.repository.post;
 
+import com.qudump.jiangedan.model.Comment;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.repository.post.datasource.PostDataStore;
 import com.qudump.jiangedan.repository.post.datasource.PostDataStoreFactory;
@@ -30,6 +31,11 @@ public class PostRepository {
     public Observable<Post> post(long postId) {
         PostDataStore postDataStore = postDataStoreFactory.create(postId);
         return postDataStore.postDetail(postId);
+    }
+
+    public Observable<List<Comment>> postComments(long id) {
+        PostDataStore postDataStore = postDataStoreFactory.createCloudDataStore();
+        return postDataStore.postComments(id);
     }
 
 }

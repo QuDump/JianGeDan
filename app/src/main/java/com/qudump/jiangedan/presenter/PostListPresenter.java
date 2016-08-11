@@ -38,7 +38,6 @@ public class PostListPresenter implements PostListContract.Presenter {
 
     @Override
     public void loadPosts(int page) {
-        isRefresh = (page == 1);
         getPostList
                 .setPage(page)
                 .execute(new PostListSubscriber());
@@ -52,8 +51,7 @@ public class PostListPresenter implements PostListContract.Presenter {
 
     @Override
     public void loadNextPage() {
-        currentPage++;
-        loadPosts(currentPage);
+        loadPosts(++currentPage);
     }
 
     @Override
@@ -74,7 +72,7 @@ public class PostListPresenter implements PostListContract.Presenter {
 
         @Override
         public void onNext(List<Post> posts) {
-            if(isRefresh) {
+            if(currentPage == 1) {
                 mPosts.clear();
             }
             mPosts.addAll(posts);

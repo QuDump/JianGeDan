@@ -15,6 +15,15 @@ public class PostBean {
     private AuthorBean author;
     private int comment_count;
     private CustomField custom_fields;
+    private List<CommentBean> comments;
+
+    public List<CommentBean> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentBean> comments) {
+        this.comments = comments;
+    }
 
     public long getId() {
         return id;

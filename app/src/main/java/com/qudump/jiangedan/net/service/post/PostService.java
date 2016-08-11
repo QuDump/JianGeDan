@@ -15,11 +15,11 @@ public interface PostService {
     @GET("/?oxwlxojflwblxbsapi=get_recent_posts&include=url,date,tags,author,title,comment_count,custom_fields&custom_fields=thumb_c,views&dev=1")
     Observable<PostListRespBean> getPosts(@Query("page") String page);
 
-    @GET("/")
-    Observable<PostDetailRespBean> getPostDetail(@Query("oxwlxojflwblxbsapi") String api, @Query("id") long id,@Query("include") String content);
+    @GET("/?oxwlxojflwblxbsapi=get_post&include=content")
+    Observable<PostDetailRespBean> getPostDetail(@Query("id") long id);
 
-    @GET("/")
-    Observable<PostDetailRespBean> getPostComments(@Query("oxwlxojflwblxbsapi") String api, @Query("id") long id,@Query("include") String content);
+    @GET("/?oxwlxojflwblxbsapi=get_post&include=comments")
+    Observable<PostDetailRespBean> getPostComments( @Query("id") long id);
 
     @POST("/")
     Observable<PostDetailRespBean> postAttitude();

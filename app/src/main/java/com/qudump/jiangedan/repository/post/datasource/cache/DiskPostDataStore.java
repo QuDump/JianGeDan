@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.repository.post.datasource.cache;
 
 import com.qudump.jiangedan.cache.PostCache;
+import com.qudump.jiangedan.model.Comment;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.repository.post.datasource.PostDataStore;
 
@@ -30,5 +31,10 @@ public class DiskPostDataStore implements PostDataStore{
     @Override
     public Observable<List<Post>> postList(int page) {
         throw new UnsupportedOperationException("operation is not avaliable");
+    }
+
+    @Override
+    public Observable<List<Comment>> postComments(long id) {
+        return null;
     }
 }

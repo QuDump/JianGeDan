@@ -1,7 +1,6 @@
 package com.qudump.jiangedan.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,11 +110,6 @@ public class JokeListFragment extends AbstractBaseFragment implements JokeListCo
         recyclerView.setRefreshing(false);
         LoadMoreFooterView loadMoreFooterView = (LoadMoreFooterView)recyclerView.getLoadMoreFooterView();
         loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
-    }
-
-    @Override
-    public void setPresenter(JokeListContract.Presenter presenter) {
-
     }
 
     @Override

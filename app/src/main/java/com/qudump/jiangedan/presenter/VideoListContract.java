@@ -8,7 +8,7 @@ import java.util.List;
  * Created by dili on 2016/8/9.
  */
 public interface VideoListContract {
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
         void renderView(List<LittleVideo> videos);
         void stopRefresh();
     }

@@ -1,0 +1,35 @@
+package com.qudump.jiangedan.net.bean;
+
+/**
+ * Created by dili on 2016/8/11.
+ */
+public class PostCommentsRespBean extends BaseResp {
+
+    private String previous_url;
+    private String next_url;
+    private PostBean post;
+
+    public String getPrevious_url() {
+        return previous_url;
+    }
+
+    public void setPrevious_url(String previous_url) {
+        this.previous_url = previous_url;
+    }
+
+    public String getNext_url() {
+        return next_url;
+    }
+
+    public void setNext_url(String next_url) {
+        this.next_url = next_url;
+    }
+
+    public PostBean getPost() {
+        return post;
+    }
+
+    public void setPost(PostBean post) {
+        this.post = post;
+    }
+}

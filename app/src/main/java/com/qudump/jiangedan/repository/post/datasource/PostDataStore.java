@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.repository.post.datasource;
 
+import com.qudump.jiangedan.model.Comment;
 import com.qudump.jiangedan.model.Post;
 
 import java.util.List;
@@ -12,4 +13,5 @@ import rx.Observable;
 public interface PostDataStore {
     Observable<List<Post>> postList(int page);
     Observable<Post> postDetail(long id);
+    Observable<List<Comment>> postComments(long id);
 }

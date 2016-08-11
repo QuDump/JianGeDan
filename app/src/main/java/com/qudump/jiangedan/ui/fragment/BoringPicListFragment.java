@@ -106,11 +106,6 @@ public class BoringPicListFragment extends AbstractBaseFragment implements Borin
     }
 
     @Override
-    public void setPresenter(BoringPicContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showErrMsg(String msg) {
 
     }

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by dili on 2016/8/3.
  */
 public interface PostListContract {
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView {
         void renderView(List<Post> posts);
         void stopRefresh();
     }

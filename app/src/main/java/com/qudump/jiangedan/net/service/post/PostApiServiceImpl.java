@@ -1,9 +1,8 @@
 package com.qudump.jiangedan.net.service.post;
 
 import com.qudump.jiangedan.exception.NetworkConnectionException;
-import com.qudump.jiangedan.model.Author;
 import com.qudump.jiangedan.model.Post;
-import com.qudump.jiangedan.net.bean.AuthorBean;
+import com.qudump.jiangedan.net.bean.CommentBean;
 import com.qudump.jiangedan.net.bean.PostBean;
 
 import java.util.List;
@@ -28,13 +27,6 @@ public class PostApiServiceImpl implements PostApiService {
     @Override
     public Observable<List<PostBean>> postList(int page) {
 
-//        Map<String,String> queryMap = new HashMap<>();
-//        queryMap.put("oxwlxojflwblxbsapi","get_recent_post");
-//        queryMap.put("include","url,date,tags,author,title,comment_count,custom_fields");
-//        queryMap.put("page",String.valueOf(page));
-//        queryMap.put("custom_fields","thumb_c,views");
-//        queryMap.put("dev","1");
-
         return retrofit
                 .create(PostService.class)
                 .getPosts(String.valueOf(page))
@@ -44,23 +36,14 @@ public class PostApiServiceImpl implements PostApiService {
                     }
                     return Observable.just(resp.getPosts());
                 });
-//                .map(resp->{
-//                    List<Post> posts = new ArrayList<>();
-//                    for(PostBean item:resp.getPosts()){
-//                        posts.add(mapBeanToModel(item));
-//                    }
-//                    return posts;
-//                });
     }
 
     @Override
     public Observable<Post> postDetailById(long id) {
-        String api = "get_post";
-        String param = "content";
 
         return retrofit
                 .create(PostService.class)
-                .getPostDetail(api,id,param)
+                .getPostDetail(id)
                 .flatMap(resp->{
                     if(resp ==null || !resp.getStatus().equals("ok")){
                         return Observable.error(new NetworkConnectionException());
@@ -75,32 +58,16 @@ public class PostApiServiceImpl implements PostApiService {
                 });
     }
 
-    private Post mapBeanToModel(PostBean item) {
-        Post post = new Post();
-        post.setId(item.getId());
-        post.setDate(item.getDate());
-        post.setCommentCount(item.getComment_count());
-        post.setThumbImg(item.getCustom_fields().getThumb_c());
-        post.setAuthor(getAuthor(item.getAuthor()));
-        post.setTitle(item.getTitle());
-        post.setUrl(item.getUrl());
-
-        return post;
+    @Override
+    public Observable<List<CommentBean>> postComments(long id) {
+        return retrofit
+                .create(PostService.class)
+                .getPostComments(id)
+                .flatMap(resp->{
+                    if(resp ==null || !resp.getStatus().equals("ok")){
+                        return Observable.error(new NetworkConnectionException());
+                    }
+                    return Observable.just(resp.getPost().getComments());
+                });
     }
-
-    private Author getAuthor(AuthorBean item) {
-        Author author = new Author();
-        author.setId(item.getId());
-        author.setName(item.getName());
-        author.setUrl(item.getUrl());
-        author.setDescription(item.getDescription());
-        author.setNickname(item.getNickname());
-        author.setFirstName(item.getFirst_name());
-        author.setLastName(item.getLast_name());
-        author.setSlug(item.getSlug());
-
-        return author;
-    }
-
-
 }

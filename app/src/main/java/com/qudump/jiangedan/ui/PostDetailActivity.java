@@ -1,7 +1,11 @@
 package com.qudump.jiangedan.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -23,6 +27,8 @@ import butterknife.ButterKnife;
 public class PostDetailActivity extends AppCompatActivity implements PostDetailContract.View {
     @Bind(R.id.wv_content)
     WebView webView;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     public static final String EXT_POST_KEY = "ext.post";
 
@@ -36,6 +42,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         webView.getSettings().setJavaScriptEnabled(true);
         mPost = (Post)getIntent().getSerializableExtra(EXT_POST_KEY);
 
@@ -43,6 +50,27 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
         presenter.setView(this);
         presenter.loadPost(mPost);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_post_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_comment:
+                Intent intent = new Intent(this, CommentListActivity.class);
+                intent.putExtra(CommentListActivity.EXT_ID_KEY, mPost.getId());
+                startActivity(intent);
+                return true;
+            case R.id.action_share:
+                //ShareUtil.shareText(getActivity(), freshNews.getTitle() + " " + freshNews.getUrl());
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -57,11 +85,6 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
 
     @Override
     public void stopRefresh() {
-
-    }
-
-    @Override
-    public void setPresenter(PostDetailContract.Presenter presenter) {
 
     }
 

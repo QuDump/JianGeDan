@@ -8,7 +8,7 @@ import java.util.List;
  * Created by dili on 2016/8/8.
  */
 public interface GirlPicContract {
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView {
         void renderView(List<GirlPic> girlPics);
         void stopRefresh();
     }

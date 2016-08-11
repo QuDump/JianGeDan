@@ -102,11 +102,6 @@ public class VideoListFragment extends AbstractBaseFragment implements VideoList
     }
 
     @Override
-    public void setPresenter(VideoListContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showErrMsg(String msg) {
 
     }

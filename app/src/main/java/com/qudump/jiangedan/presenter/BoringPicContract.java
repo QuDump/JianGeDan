@@ -8,7 +8,7 @@ import java.util.List;
  * Created by qidong on 2016/8/8.
  */
 public interface BoringPicContract {
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
         void renderView(List<BoringPic> boringPicList);
         void stopRefresh();
     }

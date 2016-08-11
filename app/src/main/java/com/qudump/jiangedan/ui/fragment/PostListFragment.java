@@ -110,8 +110,4 @@ public class PostListFragment extends AbstractBaseFragment implements PostListCo
         loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
     }
 
-    @Override
-    public void setPresenter(PostListContract.Presenter presenter) {
-
-    }
 }

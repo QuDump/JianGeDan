@@ -1,7 +1,9 @@
 package com.qudump.jiangedan.repository.post.datasource.net;
 
 import com.qudump.jiangedan.cache.PostCache;
+import com.qudump.jiangedan.model.Comment;
 import com.qudump.jiangedan.model.Post;
+import com.qudump.jiangedan.net.bean.mapper.CommentBeanMapper;
 import com.qudump.jiangedan.net.bean.mapper.PostBeanDataMapper;
 import com.qudump.jiangedan.net.service.post.PostApiService;
 import com.qudump.jiangedan.repository.post.datasource.PostDataStore;
@@ -21,6 +23,7 @@ public class CloudPostDataStore implements PostDataStore {
     private PostApiService postApiService;
     private PostCache postCache;
     private PostBeanDataMapper postBeanDataMapper;
+    private CommentBeanMapper commentBeanMapper;
     private Action1<Post> saveToCacheAction = post -> {
         if (post != null) {
             postCache.put(post);
@@ -28,10 +31,15 @@ public class CloudPostDataStore implements PostDataStore {
     };
 
     @Inject
-    public CloudPostDataStore(PostApiService postApiService, PostCache postCache, PostBeanDataMapper postBeanDataMapper) {
+    public CloudPostDataStore(PostApiService postApiService
+            , PostCache postCache
+            , PostBeanDataMapper postBeanDataMapper
+            , CommentBeanMapper commentBeanMapper) {
+
         this.postApiService = postApiService;
         this.postCache = postCache;
         this.postBeanDataMapper = postBeanDataMapper;
+        this.commentBeanMapper = commentBeanMapper;
     }
 
     @Override
@@ -44,5 +52,10 @@ public class CloudPostDataStore implements PostDataStore {
     public Observable<Post> postDetail(final long id) {
 
         return postApiService.postDetailById(id).doOnNext(saveToCacheAction);
+    }
+
+    @Override
+    public Observable<List<Comment>> postComments(long id) {
+        return postApiService.postComments(id).map(commentBeanMapper::transform);
     }
 }

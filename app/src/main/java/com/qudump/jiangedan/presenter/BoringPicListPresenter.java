@@ -39,7 +39,7 @@ public class BoringPicListPresenter implements BoringPicContract.Presenter {
 
     @Override
     public void loadNextPage() {
-        loadBoringPics(currentPage++);
+        loadBoringPics(++currentPage);
     }
 
     @Override

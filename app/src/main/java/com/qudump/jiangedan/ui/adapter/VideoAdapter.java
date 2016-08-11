@@ -50,17 +50,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder viewHolder, int pos) {
         final LittleVideo item = videoList.get(pos);
 
-//        if(item.getPics().get(0).toLowerCase().endsWith("gif")){
-//            DraweeController draweeController = Fresco
-//                    .newDraweeControllerBuilder()
-//                    .setUri(item.getPics().get(0))
-//                    .setAutoPlayAnimations(true)
-//                    .build();
-//            viewHolder.img.setController(draweeController);
-//        } else {
-//            viewHolder.img.setImageURI(Uri.parse(item.getPics().get(0)));
-//        }
-
         viewHolder.img.setImageURI(Uri.parse(item.getThumbNail()));
         viewHolder.tvTitle.setText(item.getTitle());
         viewHolder.tvDesc.setText(item.getDescription());

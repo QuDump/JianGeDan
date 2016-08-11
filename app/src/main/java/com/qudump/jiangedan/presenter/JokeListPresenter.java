@@ -54,7 +54,7 @@ public class JokeListPresenter implements JokeListContract.Presenter {
 
     @Override
     public void loadNextPage() {
-        loadJokes(currentPage++);
+        loadJokes(++currentPage);
     }
 
     public class GetJokesSubscriber extends Subscriber<List<Joke>> {

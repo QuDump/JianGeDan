@@ -105,11 +105,6 @@ public class GirlPicListFragment extends AbstractBaseFragment implements GirlPic
     }
 
     @Override
-    public void setPresenter(GirlPicContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showErrMsg(String msg) {
 
     }

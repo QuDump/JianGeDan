@@ -40,7 +40,7 @@ public class GirlPicPresenter implements GirlPicContract.Presenter {
 
     @Override
     public void loadNextPage() {
-        loadGirlPics(currentPage++);
+        loadGirlPics(++currentPage);
     }
 
     @Override

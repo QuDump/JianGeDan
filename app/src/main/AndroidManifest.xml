@@ -20,8 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.PostDetailActivity"/>
+        <activity android:name=".ui.PostDetailActivity"
+            android:theme="@style/PostDetailActivityTheme"/>
+
         <activity android:name=".ui.PicViewerActivity"/>
+        <activity android:name=".ui.CommentListActivity"/>
     </application>
 
 </manifest>
