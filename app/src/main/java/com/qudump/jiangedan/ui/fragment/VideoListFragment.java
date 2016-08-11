@@ -1,19 +1,21 @@
 package com.qudump.jiangedan.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aspsine.irecyclerview.IRecyclerView;
+import com.aspsine.irecyclerview.OnLoadMoreListener;
+import com.aspsine.irecyclerview.OnRefreshListener;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.injection.module.VideoListFragmentModule;
 import com.qudump.jiangedan.model.LittleVideo;
 import com.qudump.jiangedan.presenter.VideoListContract;
 import com.qudump.jiangedan.presenter.VideoListPresenter;
 import com.qudump.jiangedan.ui.adapter.VideoAdapter;
+import com.qudump.jiangedan.ui.widget.LoadMoreFooterView;
 
 import java.util.List;
 
@@ -28,10 +30,7 @@ import butterknife.ButterKnife;
 public class VideoListFragment extends AbstractBaseFragment implements VideoListContract.View{
 
     @Bind(R.id.recycler_view)
-    RecyclerView mRecyclerView;
-    @Bind(R.id.swipeRefreshLayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
-
+    IRecyclerView mRecyclerView;
     @Inject
     VideoListPresenter presenter;
 
@@ -55,19 +54,26 @@ public class VideoListFragment extends AbstractBaseFragment implements VideoList
     }
 
     private void initView(){
-        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+        mAdapter = new VideoAdapter(getActivityContext());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext(),LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setIAdapter(mAdapter);
+        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
                 presenter.loadRecent();
             }
         });
-        mAdapter = new VideoAdapter(getActivityContext());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext(),LinearLayoutManager.VERTICAL,false));
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(View view) {
+                LoadMoreFooterView loadMoreFooterView = (LoadMoreFooterView)mRecyclerView.getLoadMoreFooterView();
+                if (loadMoreFooterView.canLoadMore() && mAdapter.getItemCount() > 0) {
+                    loadMoreFooterView.setStatus(LoadMoreFooterView.Status.LOADING);
+                    presenter.loadNextPage();
+                }
+            }
+        });
         presenter.setView(this);
     }
 
@@ -90,9 +96,9 @@ public class VideoListFragment extends AbstractBaseFragment implements VideoList
 
     @Override
     public void stopRefresh() {
-        if(mSwipeRefreshLayout.isRefreshing()) {
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
+        mRecyclerView.setRefreshing(false);
+        LoadMoreFooterView loadMoreFooterView = (LoadMoreFooterView)mRecyclerView.getLoadMoreFooterView();
+        loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
     }
 
     @Override

@@ -16,5 +16,6 @@ public interface GirlPicContract {
     interface Presenter extends BasePresenter<View> {
         void loadRecent();
         void loadGirlPics(int page);
+        void loadNextPage();
     }
 }

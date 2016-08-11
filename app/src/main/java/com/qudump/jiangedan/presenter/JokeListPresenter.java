@@ -17,8 +17,8 @@ public class JokeListPresenter implements JokeListContract.Presenter {
 
     private GetJokeList getJokeList;
     private JokeListContract.View view;
-    private boolean isRefresh = true;
     private List<Joke> mJokes = new ArrayList<>();
+    private int currentPage = 1;
 
     @Inject
     public JokeListPresenter(GetJokeList getJokeList) {
@@ -43,13 +43,18 @@ public class JokeListPresenter implements JokeListContract.Presenter {
 
     @Override
     public void loadJokes(final int page) {
-        isRefresh = (page == 1);
         getJokeList.setPage(page).execute(new GetJokesSubscriber());
     }
 
     @Override
     public void loadRecent() {
-        loadJokes(1);
+        currentPage = 1;
+        loadJokes(currentPage);
+    }
+
+    @Override
+    public void loadNextPage() {
+        loadJokes(currentPage++);
     }
 
     public class GetJokesSubscriber extends Subscriber<List<Joke>> {
@@ -65,7 +70,7 @@ public class JokeListPresenter implements JokeListContract.Presenter {
 
         @Override
         public void onNext(List<Joke> jokes) {
-            if(isRefresh) {
+            if(currentPage == 1) {
                 mJokes.clear();
             }
             mJokes.addAll(jokes);

@@ -16,5 +16,6 @@ public interface JokeListContract {
     interface Presenter extends BasePresenter<View> {
         void loadJokes(int page);
         void loadRecent();
+        void loadNextPage();
     }
 }

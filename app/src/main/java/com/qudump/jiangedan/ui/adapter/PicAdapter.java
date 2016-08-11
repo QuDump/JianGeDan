@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.aspsine.irecyclerview.IViewHolder;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -96,7 +97,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends IViewHolder {
         @Bind(R.id.img)
         SimpleDraweeView img;
         @Bind(R.id.tv_info)

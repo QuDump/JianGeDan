@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.aspsine.irecyclerview.IViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.Post;
@@ -61,6 +62,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.img.setImageURI(Uri.parse(imgUrl));
 
         setAnimation(holder.card, position);
+        holder.card.setOnClickListener(listener->{
+            Intent intent = new Intent(mContext, PostDetailActivity.class);
+            intent.putExtra(PostDetailActivity.EXT_POST_KEY,mPosts.get(position));
+            mContext.startActivity(intent);
+        });
 
     }
 
@@ -84,7 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return mPosts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends IViewHolder {
         @Bind(R.id.tv_title)
         TextView tv_title;
         @Bind(R.id.tv_info)
@@ -99,13 +105,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-            itemView.setOnClickListener(listener->{
-                int pos = getAdapterPosition();
-                Intent intent = new Intent(mContext, PostDetailActivity.class);
-                intent.putExtra(PostDetailActivity.EXT_POST_KEY,mPosts.get(pos));
-                mContext.startActivity(intent);
-                //TODO goto detain actvity
-            });
         }
     }
 }

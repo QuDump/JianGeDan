@@ -16,5 +16,6 @@ public interface VideoListContract {
     interface Presenter extends BasePresenter<View> {
         void loadRecent();
         void loadVideos(final int page);
+        void loadNextPage();
     }
 }

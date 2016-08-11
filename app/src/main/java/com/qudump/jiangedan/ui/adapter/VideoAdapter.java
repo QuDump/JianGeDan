@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.aspsine.irecyclerview.IViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.LittleVideo;
@@ -90,7 +91,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends IViewHolder {
         @Bind(R.id.img)
         SimpleDraweeView img;
         @Bind(R.id.tv_author)

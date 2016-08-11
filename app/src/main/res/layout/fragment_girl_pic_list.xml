@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!--<android.support.v4.widget.SwipeRefreshLayout-->
-        <!--android:id="@+id/swipeRefreshLayout"-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/container"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--&lt;!&ndash;<android.support.v4.widget.SwipeRefreshLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/swipeRefreshLayout"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</android.support.v4.widget.SwipeRefreshLayout>&ndash;&gt;-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_content"-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <!--android:layout_height="match_parent"/>-->
 
 
-</RelativeLayout>
+<!--</RelativeLayout>-->
+
+<com.aspsine.irecyclerview.IRecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rv_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:refreshHeaderLayout="@layout/layout_irecyclerview_refresh_header"
+    app:loadMoreFooterLayout="@layout/layout_irecyclerview_load_more_footer"
+    app:loadMoreEnabled="true"
+    app:refreshEnabled="true"/>

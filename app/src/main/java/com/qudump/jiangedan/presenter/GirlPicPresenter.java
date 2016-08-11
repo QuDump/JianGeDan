@@ -19,6 +19,7 @@ public class GirlPicPresenter implements GirlPicContract.Presenter {
     private GetGirlPicList getGirlPicList;
     private boolean isRefresh = true;
     private List<GirlPic> mGirlPics = new ArrayList<>();
+    private int currentPage = 1;
 
     @Inject
     public GirlPicPresenter(GetGirlPicList getGirlPicList) {
@@ -27,14 +28,19 @@ public class GirlPicPresenter implements GirlPicContract.Presenter {
 
     @Override
     public void loadRecent() {
-        loadGirlPics(1);
+        currentPage = 1;
+        loadGirlPics(currentPage);
     }
 
     @Override
     public void loadGirlPics(int page) {
-        isRefresh = (page ==1);
         getGirlPicList.setPage(page).execute(new GirlPicsSubscriber());
 
+    }
+
+    @Override
+    public void loadNextPage() {
+        loadGirlPics(currentPage++);
     }
 
     @Override
@@ -65,7 +71,7 @@ public class GirlPicPresenter implements GirlPicContract.Presenter {
 
         @Override
         public void onNext(List<GirlPic> girlPics) {
-            if(isRefresh) {
+            if(currentPage == 1) {
                 mGirlPics.clear();
             }
             mGirlPics.addAll(girlPics);

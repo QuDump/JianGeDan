@@ -15,5 +15,6 @@ public interface BoringPicContract {
     interface Presenter extends BasePresenter<View> {
         void loadRecent();
         void loadBoringPics(final int page);
+        void loadNextPage();
     }
 }

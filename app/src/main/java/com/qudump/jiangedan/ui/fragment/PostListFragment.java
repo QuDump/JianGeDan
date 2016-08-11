@@ -16,6 +16,7 @@ import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.presenter.PostListContract;
 import com.qudump.jiangedan.presenter.PostListPresenter;
 import com.qudump.jiangedan.ui.adapter.PostAdapter;
+import com.qudump.jiangedan.ui.widget.LoadMoreFooterView;
 
 import java.util.List;
 
@@ -31,8 +32,6 @@ public class PostListFragment extends AbstractBaseFragment implements PostListCo
 
     @Bind(R.id.recycler_view)
     IRecyclerView mRecyclerView;
-//    @Bind(R.id.swipeRefreshLayout)
-//    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Inject
     PostListPresenter presenter;
@@ -71,16 +70,6 @@ public class PostListFragment extends AbstractBaseFragment implements PostListCo
     }
 
     private void init(){
-//        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-//                android.R.color.holo_green_light,
-//                android.R.color.holo_orange_light,
-//                android.R.color.holo_red_light);
-//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                presenter.loadRecent();
-//            }
-//        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext()));
         mAdapter = new PostAdapter(getActivityContext());
         mRecyclerView.setIAdapter(mAdapter);
@@ -93,74 +82,13 @@ public class PostListFragment extends AbstractBaseFragment implements PostListCo
         mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(View view) {
-                presenter.loadNextPage();
+                LoadMoreFooterView loadMoreFooterView = (LoadMoreFooterView)mRecyclerView.getLoadMoreFooterView();
+                if (loadMoreFooterView.canLoadMore() && mAdapter.getItemCount() > 0) {
+                    loadMoreFooterView.setStatus(LoadMoreFooterView.Status.LOADING);
+                    presenter.loadNextPage();
+                }
             }
         });
-//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//            }
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//
-//                //得到当前显示的最后一个item的view
-//                View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount()-1);
-//                //得到lastChildView的bottom坐标值
-//                int lastChildBottom = lastChildView.getBottom();
-//                //得到Recyclerview的底部坐标减去底部padding值，也就是显示内容最底部的坐标
-//                int recyclerBottom =  recyclerView.getBottom()-recyclerView.getPaddingBottom();
-//                //通过这个lastChildView得到这个view当前的position值
-//                int lastPosition  = recyclerView.getLayoutManager().getPosition(lastChildView);
-//
-//                //判断lastChildView的bottom值跟recyclerBottom
-//                //判断lastPosition是不是最后一个position
-//                //如果两个条件都满足则说明是真正的滑动到了底部
-//                if(lastChildBottom == recyclerBottom && lastPosition == recyclerView.getLayoutManager().getItemCount()-1 ){
-//                    Toast.makeText(getActivityContext(), "滑动到底了", Toast.LENGTH_SHORT).show();
-//                    TextView textView = new TextView(getActivityContext());
-//                    textView.setText("加载中....");
-//                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//                    ViewGroup parentView = (ViewGroup) recyclerView.getParent();
-//                    parentView.addView(textView,layoutParams);
-//                }
-////                int visibleItemCount = recyclerView.getChildCount();
-////                int totalItemCount = mLayoutManager.getItemCount();
-////
-////                int firstVisibleItemIndex = mLayoutManager.findFirstVisibleItemPosition();
-////                int lastVisibleItemIndex = mLayoutManager.findLastVisibleItemPosition();
-////                if(lastVisibleItemIndex == (totalItemCount-1)) {
-////                    TextView textView = new TextView(getActivityContext());
-////                    textView.setText("加载中....");
-////                    swipeRefreshLayout.addView(textView);
-////                }
-////
-////                boolean loading = true;
-////                int previousTotal = -1;
-////
-////                //synchronizew loading state when item count changes
-////                if (loading) {
-////                    if (totalItemCount > previousTotal) {
-////                        loading = false;
-////                        previousTotal = totalItemCount;
-////                    }
-////                }
-////                if (!loading)
-////                    if ((totalItemCount - visibleItemCount) <= firstVisibleItemIndex) {
-////                        // Loading NOT in progress and end of list has been reached
-////                        // also triggered if not enough items to fill the screen
-////                        // if you start loading
-////                        loading = true;
-////                    } else if (firstVisibleItemIndex == 0){
-////                        // top of list reached
-////                        // if you start loading
-////                        loading = true;
-////                    }
-//            }
-//        });
-
     }
 
     @Override
@@ -171,13 +99,15 @@ public class PostListFragment extends AbstractBaseFragment implements PostListCo
     @Override
     public void showErrMsg(String msg) {
         Toast.makeText(getActivityContext(),msg,Toast.LENGTH_SHORT);
+        LoadMoreFooterView loadMoreFooterView = (LoadMoreFooterView)mRecyclerView.getLoadMoreFooterView();
+        loadMoreFooterView.setStatus(LoadMoreFooterView.Status.ERROR);
     }
 
     @Override
     public void stopRefresh() {
-//        if (mSwipeRefreshLayout.isRefreshing()) {
-//            mSwipeRefreshLayout.setRefreshing(false);
-//        }
+        mRecyclerView.setRefreshing(false);
+        LoadMoreFooterView loadMoreFooterView = (LoadMoreFooterView)mRecyclerView.getLoadMoreFooterView();
+        loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
     }
 
     @Override

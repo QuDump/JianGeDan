@@ -16,8 +16,8 @@ import rx.Subscriber;
 public class BoringPicListPresenter implements BoringPicContract.Presenter {
     private BoringPicContract.View view;
     private GetBoringPicList getBoringPicList;
-    private boolean isRefresh = true;
     private List<BoringPic> mBoringPics = new ArrayList<>();
+    private int currentPage = 1;
 
     @Inject
     public BoringPicListPresenter(GetBoringPicList getBoringPicList) {
@@ -28,13 +28,18 @@ public class BoringPicListPresenter implements BoringPicContract.Presenter {
 
     @Override
     public void loadRecent() {
-        loadBoringPics(1);
+        currentPage = 1;
+        loadBoringPics(currentPage);
     }
 
     @Override
     public void loadBoringPics(int page) {
-        isRefresh = (page == 1);
         getBoringPicList.setPage(page).execute(new GetBoringPicsSubscriber());
+    }
+
+    @Override
+    public void loadNextPage() {
+        loadBoringPics(currentPage++);
     }
 
     @Override
@@ -65,7 +70,7 @@ public class BoringPicListPresenter implements BoringPicContract.Presenter {
 
         @Override
         public void onNext(List<BoringPic> boringPics) {
-            if(isRefresh){
+            if(currentPage == 1){
                 mBoringPics.clear();
             }
             mBoringPics.addAll(boringPics);

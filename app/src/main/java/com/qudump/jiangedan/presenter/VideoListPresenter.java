@@ -16,8 +16,8 @@ import rx.Subscriber;
 public class VideoListPresenter implements VideoListContract.Presenter {
     private GetVideoList getVideoList;
     private List<LittleVideo> mLittleVideos = new ArrayList<>();
-    private boolean isRefresh = true;
     private VideoListContract.View view;
+    private int currentPage = 1;
 
     @Inject
     public VideoListPresenter(GetVideoList getVideoList) {
@@ -26,13 +26,18 @@ public class VideoListPresenter implements VideoListContract.Presenter {
 
     @Override
     public void loadRecent() {
-        loadVideos(1);
+        currentPage = 1;
+        loadVideos(currentPage);
     }
 
     @Override
     public void loadVideos(int page) {
-        isRefresh = (page == 1);
         getVideoList.setPage(page).execute(new VideoListSubscriber());
+    }
+
+    @Override
+    public void loadNextPage() {
+        loadVideos(currentPage++);
     }
 
     @Override
@@ -63,7 +68,7 @@ public class VideoListPresenter implements VideoListContract.Presenter {
 
         @Override
         public void onNext(List<LittleVideo> videos) {
-            if(isRefresh) {
+            if(currentPage == 1) {
                 mLittleVideos.clear();
             }
             mLittleVideos.addAll(videos);

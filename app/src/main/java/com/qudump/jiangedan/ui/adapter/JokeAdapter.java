@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.aspsine.irecyclerview.IViewHolder;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.Joke;
 import com.qudump.jiangedan.utils.String2TimeUtil;
@@ -74,7 +75,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends IViewHolder {
         @Bind(R.id.tv_content)
         TextView tvContent;
         @Bind(R.id.tv_info)
