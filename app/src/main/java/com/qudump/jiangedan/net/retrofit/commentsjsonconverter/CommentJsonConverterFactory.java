@@ -1,4 +1,4 @@
-package com.qudump.jiangedan.net.retrofit;
+package com.qudump.jiangedan.net.retrofit.commentsjsonconverter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -10,32 +10,32 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 /**
- * Created by dili on 2016/8/3.
+ * Created by dili on 2016/8/12.
  */
-public class FastJsonConverterFactory extends Converter.Factory{
+public class CommentJsonConverterFactory extends Converter.Factory{
     private Charset charset;
     private static final Charset UTF_8  = Charset.forName("UTF-8");
 
-    public static FastJsonConverterFactory create() {
+    public static CommentJsonConverterFactory create() {
         return create(UTF_8);
     }
 
-    public static FastJsonConverterFactory create(Charset charset) {
-        return new FastJsonConverterFactory(charset);
+    public static CommentJsonConverterFactory create(Charset charset) {
+        return new CommentJsonConverterFactory(charset);
     }
 
-    public FastJsonConverterFactory(Charset charset) {
+    public CommentJsonConverterFactory(Charset charset) {
         this.charset = charset;
     }
 
     @Override
     public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations,
                                                           Annotation[] methodAnnotations, Retrofit retrofit) {
-        return new FastJsonRequestBodyConverter<>(type, charset);
+        return new CommentJsonRequestBodyConverter<>(type, charset);
     }
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-        return new FastJsonResponseBodyConverter<>(type, charset);
+        return new CommentJsonResponseBodyConverter<>(type, charset,retrofit);
     }
 }

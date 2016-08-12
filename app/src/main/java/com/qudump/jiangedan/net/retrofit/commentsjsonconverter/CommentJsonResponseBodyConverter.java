@@ -1,4 +1,4 @@
-package com.qudump.jiangedan.net.retrofit;
+package com.qudump.jiangedan.net.retrofit.commentsjsonconverter;
 
 import com.alibaba.fastjson.JSON;
 
@@ -8,19 +8,21 @@ import java.nio.charset.Charset;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
+import retrofit2.Retrofit;
 
 /**
- * Created by dili on 2016/8/3.
+ * Created by dili on 2016/8/12.
  */
-public class FastJsonResponseBodyConverter <T> implements Converter<ResponseBody, T> {
+public class CommentJsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
 
     private Type type;
     private Charset charset;
+    private Retrofit retrofit;
 
-    public FastJsonResponseBodyConverter() {
+    public CommentJsonResponseBodyConverter() {
     }
 
-    public FastJsonResponseBodyConverter(Type type, Charset charset) {
+    public CommentJsonResponseBodyConverter(Type type, Charset charset, Retrofit retrofit) {
         this.type = type;
         this.charset = charset;
     }

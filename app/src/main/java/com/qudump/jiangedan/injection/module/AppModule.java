@@ -6,7 +6,7 @@ import com.qudump.jiangedan.net.executor.PostExecutionThread;
 import com.qudump.jiangedan.net.executor.PostExecutionThreadImpl;
 import com.qudump.jiangedan.net.executor.ThreadExecutor;
 import com.qudump.jiangedan.net.executor.ThreadExecutorImpl;
-import com.qudump.jiangedan.net.retrofit.FastJsonConverterFactory;
+import com.qudump.jiangedan.net.retrofit.fastjsonconverter.FastJsonConverterFactory;
 import com.qudump.jiangedan.ui.BaseApplication;
 
 import java.util.concurrent.TimeUnit;
@@ -53,15 +53,6 @@ public class AppModule {
                 .build();
     }
 
-//    @Provides @Singleton
-//    public OkHttpClient provideOkHttpClient(MockInterceptor intercepter){
-//
-//        return new OkHttpClient.Builder()
-//                .addInterceptor(intercepter)
-//                .connectTimeout(30, TimeUnit.SECONDS)
-//                .build();
-//    }
-
     @Provides @Singleton
     public Retrofit provideRetrofit(OkHttpClient client){
         return new Retrofit.Builder()
@@ -70,5 +61,13 @@ public class AppModule {
                 .addConverterFactory(FastJsonConverterFactory.create())
                 .baseUrl(BASE_URL)
                 .build();
+    }
+
+    @Provides @Singleton
+    public Retrofit.Builder provideRetrofitBuilder(OkHttpClient client){
+        return new Retrofit.Builder()
+                .client(client)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(FastJsonConverterFactory.create());
     }
 }

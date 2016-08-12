@@ -56,6 +56,7 @@ public class PostDetailPresenter implements PostDetailContract.Presenter {
 
         @Override
         public void onNext(Post post) {
+
             mPost.setContent(post.getContent());
             view.renderView(mPost);
         }

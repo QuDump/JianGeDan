@@ -14,6 +14,15 @@ public class GirlPic {
     private String date;
     private int likeCounts;
     private int dislikeCounts;
+    private int comments;
+
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
+    }
 
     public long getId() {
         return id;

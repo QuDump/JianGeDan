@@ -12,4 +12,6 @@ import rx.Observable;
 public interface BoringPicService {
     @GET("/?oxwlxojflwblxbsapi=jandan.get_pic_comments")
     Observable<BoringPicListRespBean> boringPics(@Query("page") int page);
+
+
 }

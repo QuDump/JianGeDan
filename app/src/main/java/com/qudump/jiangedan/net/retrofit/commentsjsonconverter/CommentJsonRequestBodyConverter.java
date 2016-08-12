@@ -1,4 +1,4 @@
-package com.qudump.jiangedan.net.retrofit;
+package com.qudump.jiangedan.net.retrofit.commentsjsonconverter;
 
 import com.alibaba.fastjson.JSON;
 
@@ -11,14 +11,14 @@ import okhttp3.RequestBody;
 import retrofit2.Converter;
 
 /**
- * Created by dili on 2016/8/3.
+ * Created by dili on 2016/8/12.
  */
-public class FastJsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
+public class CommentJsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
     private Type type;
     private Charset charset;
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
 
-    public FastJsonRequestBodyConverter(Type type, Charset charset) {
+    public CommentJsonRequestBodyConverter(Type type, Charset charset) {
         this.type = type;
         this.charset = charset;
     }
