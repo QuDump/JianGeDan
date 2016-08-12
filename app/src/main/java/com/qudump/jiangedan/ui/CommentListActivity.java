@@ -3,6 +3,7 @@ package com.qudump.jiangedan.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.Toast;
 
 import com.aspsine.irecyclerview.IRecyclerView;
 import com.aspsine.irecyclerview.OnRefreshListener;
@@ -80,6 +81,6 @@ public class CommentListActivity extends AppCompatActivity implements PostCommen
 
     @Override
     public void showErrMsg(String msg) {
-
+        Toast.makeText(this,msg,Toast.LENGTH_LONG);
     }
 }

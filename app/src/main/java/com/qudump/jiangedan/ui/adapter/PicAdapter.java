@@ -67,6 +67,8 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
         viewHolder.tvAuthor.setText(item.getAuthorName());
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
+        viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
+        viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
 
         setAnimation(viewHolder.card,pos);
         viewHolder.card.setOnClickListener(listener->{
@@ -106,6 +108,12 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
         TextView tvDate;
         @Bind(R.id.card)
         CardView card;
+        @Bind(R.id.tv_comments)
+        TextView tvComments;
+        @Bind(R.id.tv_like_count)
+        TextView tvLike;
+        @Bind(R.id.tv_dislike_count)
+        TextView tvDislike;
 
         public ViewHolder(View itemView) {
             super(itemView);

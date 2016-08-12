@@ -69,26 +69,26 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_views"
+                android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/tv_info"
                 android:singleLine="true"
-                android:text="浏览120次"
+                android:text="两小时以前"
                 android:textColor="@color/secondary_text_default_material_light"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_share"
+                android:id="@+id/tv_tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:padding="16dp"
                 android:singleLine="true"
-                android:text="分享"
+                android:text="科普"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="14sp" />
 

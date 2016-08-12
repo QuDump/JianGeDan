@@ -4,6 +4,7 @@ import com.qudump.jiangedan.model.Author;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.net.bean.AuthorBean;
 import com.qudump.jiangedan.net.bean.PostBean;
+import com.qudump.jiangedan.net.bean.TagBean;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,10 +33,22 @@ public class PostBeanDataMapper {
             post.setTitle(postBean.getTitle());
             post.setUrl(postBean.getUrl());
             post.setContent(postBean.getContent());
+            post.setTags(getTags(postBean.getTags()));
 
         }
 
         return post;
+    }
+
+    private List<String> getTags(List<TagBean> tagBeans) {
+        List<String> tags = new ArrayList<>();
+        if(null != tagBeans) {
+            for(TagBean tagBean:tagBeans) {
+                tags.add(tagBean.getTitle());
+            }
+        }
+
+        return tags;
     }
 
     private Author getAuthor(AuthorBean item) {

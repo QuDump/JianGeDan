@@ -17,6 +17,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.Post;
 import com.qudump.jiangedan.ui.PostDetailActivity;
+import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         final Post post = mPosts.get(position);
         holder.tv_title.setText(post.getTitle());
         holder.tv_info.setText(post.getAuthor().getNickname());
-        //TODO set img and share
+        holder.tv_time.setText(String2TimeUtil.dateString2GoodExperienceFormat(post.getDate()));
+        holder.tv_tags.setText(post.getTags().toString());
 
         String imgUrl = post.getThumbImg().get(0);
         if(post.getThumbImg().get(0).contains("custom")) {
@@ -95,8 +97,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView tv_title;
         @Bind(R.id.tv_info)
         TextView tv_info;
-        @Bind(R.id.tv_share)
-        TextView tv_share;
+        @Bind(R.id.tv_tags)
+        TextView tv_tags;
+        @Bind(R.id.tv_time)
+        TextView tv_time;
         @Bind(R.id.img)
         SimpleDraweeView img;
         @Bind(R.id.card)

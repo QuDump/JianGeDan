@@ -67,6 +67,8 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
 
         viewHolder.tvAuthor.setText(item.getAuthorName());
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
+        viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
+        viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
 
         setAnimation(viewHolder.card,pos);
         viewHolder.card.setOnClickListener(listener->{
@@ -74,6 +76,8 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
             intent.putExtra(PicViewerActivity.EXT_KEY_IMG_URL,item.getPics().get(0));
             mContext.startActivity(intent);
         });
+
+
     }
 
     @Override
@@ -103,6 +107,12 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
         TextView tvAuthor;
         @Bind(R.id.tv_date)
         TextView tvDate;
+        @Bind(R.id.tv_comments)
+        TextView tvComments;
+        @Bind(R.id.tv_like_count)
+        TextView tvLike;
+        @Bind(R.id.tv_dislike_count)
+        TextView tvDislike;
         @Bind(R.id.card)
         CardView card;
 

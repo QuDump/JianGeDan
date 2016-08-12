@@ -56,6 +56,10 @@ public class PostCommentListPresenter implements PostCommentListContract.Present
         @Override
         public void onNext(List<Comment> commentList) {
             view.renderView(commentList);
+            if(null == commentList || 0 == commentList.size()) {
+                view.showErrMsg("暂时还没有评论哦");
+            }
+
         }
     }
 }

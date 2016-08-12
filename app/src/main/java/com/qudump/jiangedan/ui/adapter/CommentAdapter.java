@@ -2,7 +2,6 @@ package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         holder.tvName.setText(item.getAuthorName());
         holder.tvTime.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
-        holder.tvContent.setText(Html.fromHtml(item.getContent()));
+        holder.tvContent.setText(item.getContent());
         holder.tvLike.setText(String.valueOf(item.getLike()));
         holder.tvDislike.setText(String.valueOf(item.getDislike()));
         holder.rlLike.setOnClickListener(listener->{

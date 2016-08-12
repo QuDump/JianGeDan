@@ -52,9 +52,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
 
         viewHolder.img.setImageURI(Uri.parse(item.getThumbNail()));
         viewHolder.tvTitle.setText(item.getTitle());
-        viewHolder.tvDesc.setText(item.getDescription());
         viewHolder.tvAuthor.setText(item.getAuthorName());
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
+        viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
+        viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
 
         setAnimation(viewHolder.card,pos);
     }
@@ -87,12 +88,16 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
         TextView tvAuthor;
         @Bind(R.id.tv_time)
         TextView tvDate;
-        @Bind(R.id.tv_desc)
-        TextView tvDesc;
         @Bind(R.id.tv_title)
         TextView tvTitle;
         @Bind(R.id.card)
         CardView card;
+        @Bind(R.id.tv_comments)
+        TextView tvComments;
+        @Bind(R.id.tv_like_count)
+        TextView tvLike;
+        @Bind(R.id.tv_dislike_count)
+        TextView tvDislike;
 
         public ViewHolder(View itemView) {
             super(itemView);
