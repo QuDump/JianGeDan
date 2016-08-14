@@ -15,16 +15,28 @@ import retrofit2.Retrofit;
 public class CommentJsonConverterFactory extends Converter.Factory{
     private Charset charset;
     private static final Charset UTF_8  = Charset.forName("UTF-8");
+    private String params;
 
     public static CommentJsonConverterFactory create() {
-        return create(UTF_8);
+
+        return create(UTF_8,"");
+    }
+
+    public static CommentJsonConverterFactory create(String params) {
+
+        return create(UTF_8,params);
     }
 
     public static CommentJsonConverterFactory create(Charset charset) {
-        return new CommentJsonConverterFactory(charset);
+        return new CommentJsonConverterFactory(charset,"");
     }
 
-    public CommentJsonConverterFactory(Charset charset) {
+    public static CommentJsonConverterFactory create(Charset charset,String params) {
+        return new CommentJsonConverterFactory(charset,params);
+    }
+
+    public CommentJsonConverterFactory(Charset charset,String params) {
+        this.params = params;
         this.charset = charset;
     }
 
@@ -36,6 +48,6 @@ public class CommentJsonConverterFactory extends Converter.Factory{
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-        return new CommentJsonResponseBodyConverter<>(type, charset,retrofit);
+        return new CommentJsonResponseBodyConverter<>(type, charset,params);
     }
 }

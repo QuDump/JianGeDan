@@ -1,6 +1,8 @@
 package com.qudump.jiangedan.net.service.comment;
 
 import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.retrofit.commentsjsonconverter.CommentJsonConverterFactory;
+import com.qudump.jiangedan.net.retrofit.fastjsonconverter.FastJsonConverterFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,40 +31,18 @@ public class CommentApiServiceImpl implements CommentApiService {
         List<CommentNumberRespBean> commentNumbers = new ArrayList<>();
         try {
 
-            Retrofit retrofit = new Retrofit
+            retrofit2.Response<List<CommentNumberRespBean>> resp = new Retrofit
                     .Builder()
+                    .addConverterFactory(CommentJsonConverterFactory.create(params))
                     .baseUrl("http://jandan.duoshuo.com")
-                    .build();
-            String threadName = Thread.currentThread().getName();
-
-            Response response = retrofit
+                    .build()
                     .create(CommentService.class)
                     .comments(params)
-                    .execute()
-                    .raw();
-
-
-            String jsonStr = response.body().string();
-            JSONObject jsonObject = new JSONObject(jsonStr).getJSONObject("response");
-            String[] commentIDs = response.request().url().queryParameter("threads").split("\\,");
-
-            for(String Id:commentIDs) {
-                if(!jsonObject.isNull(Id)) {
-                    CommentNumberRespBean bean = new CommentNumberRespBean();
-                    bean.setComments(jsonObject.getJSONObject(Id).getInt(CommentNumberRespBean.COMMENTS));
-                    bean.setThread_id(jsonObject.getJSONObject(Id).getString(CommentNumberRespBean.THREAD_ID));
-                    bean.setThread_key(jsonObject.getJSONObject(Id).getString(CommentNumberRespBean.THREAD_KEY));
-                    commentNumbers.add(bean);
-                } else {
-                    commentNumbers.add(new CommentNumberRespBean(0,"0", "0"));
-                }
-            }
-
+                    .execute();
+            commentNumbers.addAll(resp.body());
 
         } catch (IOException e){
             return Observable.error( new Throwable("an error occurred when connecting the network"));
-        } catch (JSONException e) {
-            return Observable.error( new Throwable("convert error"));
         }
 
         return Observable.just(commentNumbers);
