@@ -64,6 +64,7 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailC
             case R.id.action_comment:
                 Intent intent = new Intent(this, CommentListActivity.class);
                 intent.putExtra(CommentListActivity.EXT_ID_KEY, mPost.getId());
+                intent.putExtra(CommentListActivity.EXT_IS_POST_KEY,true);
                 startActivity(intent);
                 return true;
             case R.id.action_share:

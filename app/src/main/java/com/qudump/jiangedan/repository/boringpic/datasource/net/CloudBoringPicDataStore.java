@@ -2,7 +2,7 @@ package com.qudump.jiangedan.repository.boringpic.datasource.net;
 
 import com.qudump.jiangedan.cache.BoringPicCache;
 import com.qudump.jiangedan.model.BoringPic;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.net.bean.mapper.BoringPicBeanMapper;
 import com.qudump.jiangedan.net.service.boringpic.BoringPicApiService;
 import com.qudump.jiangedan.net.service.comment.CommentApiService;
@@ -45,7 +45,7 @@ public class CloudBoringPicDataStore implements BoringPicDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
+    public Observable<List<CommentNumberBean>> commentNumbers(String params) {
         return commentApiService.commentNumbers(params);
     }
 }

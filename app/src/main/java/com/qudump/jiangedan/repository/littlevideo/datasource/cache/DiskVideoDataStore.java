@@ -2,7 +2,7 @@ package com.qudump.jiangedan.repository.littlevideo.datasource.cache;
 
 import com.qudump.jiangedan.cache.VideoCache;
 import com.qudump.jiangedan.model.LittleVideo;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.repository.littlevideo.datasource.VideoDataStore;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class DiskVideoDataStore implements VideoDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
+    public Observable<List<CommentNumberBean>> commentNumbers(String params) {
         return null;
     }
 }

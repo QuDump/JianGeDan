@@ -5,6 +5,7 @@ import android.support.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.qudump.jiangedan.injection.component.AppComponent;
 import com.qudump.jiangedan.injection.component.BoringPicComponent;
+import com.qudump.jiangedan.injection.component.CommentComponent;
 import com.qudump.jiangedan.injection.component.DaggerAppComponent;
 import com.qudump.jiangedan.injection.component.GirlPicComponent;
 import com.qudump.jiangedan.injection.component.JokeComponent;
@@ -28,6 +29,7 @@ public class BaseApplication extends MultiDexApplication {
     private GirlPicComponent girlPicComponent;
     private BoringPicComponent boringPicComponent;
     private VideoComponent videoComponent;
+    private CommentComponent commentComponent;
 
     @Override
     public void onCreate() {
@@ -88,5 +90,14 @@ public class BaseApplication extends MultiDexApplication {
 
     public void releaseVideoComponent(){
         videoComponent = null;
+    }
+
+    public CommentComponent buildCommentComponent(){
+        commentComponent = appComponent.plus(new CommentsModule());
+        return commentComponent;
+    }
+
+    public void releaseCommentComponent(){
+        commentComponent = null;
     }
 }

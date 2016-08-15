@@ -12,6 +12,18 @@ public class Comment {
     private String date;
     private int like;
     private int dislike;
+    private String avatarUrl;
+    private String parentId;
+    private boolean isHotComment;
+    private String postId;
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
 
     public long getId() {
         return id;
@@ -67,5 +79,29 @@ public class Comment {
 
     public void setDislike(int dislike) {
         this.dislike = dislike;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public boolean isHotComment() {
+        return isHotComment;
+    }
+
+    public void setHotComment(boolean hotComment) {
+        isHotComment = hotComment;
     }
 }

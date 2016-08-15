@@ -2,7 +2,7 @@ package com.qudump.jiangedan.repository.boringpic.datasource.cache;
 
 import com.qudump.jiangedan.cache.BoringPicCache;
 import com.qudump.jiangedan.model.BoringPic;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.repository.boringpic.datasource.BoringPicDataStore;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class DiskBoringPicDataStore implements BoringPicDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
+    public Observable<List<CommentNumberBean>> commentNumbers(String params) {
         return null;
     }
 }

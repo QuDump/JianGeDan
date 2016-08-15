@@ -18,6 +18,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.BoringPic;
+import com.qudump.jiangedan.ui.CommentListActivity;
 import com.qudump.jiangedan.ui.PicViewerActivity;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
@@ -70,6 +71,12 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
         viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
         viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
         viewHolder.tvComments.setText(String.valueOf(item.getComments()));
+        viewHolder.tvComments.setOnClickListener(listener->{
+            Intent intent = new Intent(mContext, CommentListActivity.class);
+            intent.putExtra(CommentListActivity.EXT_ID_KEY, item.getCommentId());
+            intent.putExtra(CommentListActivity.EXT_IS_POST_KEY,false);
+            mContext.startActivity(intent);
+        });
 
         setAnimation(viewHolder.card,pos);
         viewHolder.card.setOnClickListener(listener->{

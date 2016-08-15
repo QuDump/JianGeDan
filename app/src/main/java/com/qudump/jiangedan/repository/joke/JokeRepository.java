@@ -1,7 +1,7 @@
 package com.qudump.jiangedan.repository.joke;
 
 import com.qudump.jiangedan.model.Joke;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.repository.joke.datasource.JokeDataStore;
 import com.qudump.jiangedan.repository.joke.datasource.JokeDataStoreFactory;
 
@@ -43,13 +43,13 @@ public class JokeRepository {
         return params.toString();
     }
 
-    private Observable<List<CommentNumberRespBean>> queryCommentCounts(JokeDataStore dataStore, String params) {
+    private Observable<List<CommentNumberBean>> queryCommentCounts(JokeDataStore dataStore, String params) {
         return dataStore.commentNumbers(params);
     }
 
-    private List<Joke> appendCommentCountToPicModel(List<Joke> jokes, List<CommentNumberRespBean> commentBeans) {
+    private List<Joke> appendCommentCountToPicModel(List<Joke> jokes, List<CommentNumberBean> commentBeans) {
         for(Joke joke:jokes) {
-            for(CommentNumberRespBean bean:commentBeans){
+            for(CommentNumberBean bean:commentBeans){
                 if(joke.getCommentId() == bean.getCommentId()) {
                     joke.setComments(bean.getComments());
                     continue;

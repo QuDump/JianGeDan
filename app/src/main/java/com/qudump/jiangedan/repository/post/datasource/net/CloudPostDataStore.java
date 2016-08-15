@@ -54,8 +54,5 @@ public class CloudPostDataStore implements PostDataStore {
         return postApiService.postDetailById(id).doOnNext(saveToCacheAction);
     }
 
-    @Override
-    public Observable<List<Comment>> postComments(long id) {
-        return postApiService.postComments(id).map(commentBeanMapper::transform);
-    }
+
 }

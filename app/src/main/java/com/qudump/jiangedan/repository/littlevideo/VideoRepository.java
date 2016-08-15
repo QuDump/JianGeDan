@@ -1,7 +1,7 @@
 package com.qudump.jiangedan.repository.littlevideo;
 
 import com.qudump.jiangedan.model.LittleVideo;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.repository.littlevideo.datasource.VideoDataStore;
 import com.qudump.jiangedan.repository.littlevideo.datasource.VideoDataStoreFactory;
 
@@ -43,13 +43,13 @@ public class VideoRepository {
         return params.toString();
     }
 
-    private Observable<List<CommentNumberRespBean>> queryCommentCounts(VideoDataStore dataStore, String params) {
+    private Observable<List<CommentNumberBean>> queryCommentCounts(VideoDataStore dataStore, String params) {
         return dataStore.commentNumbers(params);
     }
 
-    private List<LittleVideo> appendCommentCountToPicModel(List<LittleVideo> videos, List<CommentNumberRespBean> commentBeans) {
+    private List<LittleVideo> appendCommentCountToPicModel(List<LittleVideo> videos, List<CommentNumberBean> commentBeans) {
         for(LittleVideo video:videos) {
-            for(CommentNumberRespBean bean:commentBeans){
+            for(CommentNumberBean bean:commentBeans){
                 if(video.getCommentId() == bean.getCommentId()) {
                     video.setComments(bean.getComments());
                     continue;

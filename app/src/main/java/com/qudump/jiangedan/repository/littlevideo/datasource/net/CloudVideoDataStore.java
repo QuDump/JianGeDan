@@ -2,7 +2,7 @@ package com.qudump.jiangedan.repository.littlevideo.datasource.net;
 
 import com.qudump.jiangedan.cache.VideoCache;
 import com.qudump.jiangedan.model.LittleVideo;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.net.bean.mapper.LittleVideoBeanMapper;
 import com.qudump.jiangedan.net.service.comment.CommentApiService;
 import com.qudump.jiangedan.net.service.littlevideo.LittleVideoApiService;
@@ -44,7 +44,7 @@ public class CloudVideoDataStore implements VideoDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
+    public Observable<List<CommentNumberBean>> commentNumbers(String params) {
         return commentApiService.commentNumbers(params);
     }
 }

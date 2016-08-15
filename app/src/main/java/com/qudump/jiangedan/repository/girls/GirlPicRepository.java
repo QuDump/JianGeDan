@@ -1,7 +1,7 @@
 package com.qudump.jiangedan.repository.girls;
 
 import com.qudump.jiangedan.model.GirlPic;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.repository.girls.datasource.GirlPicDataStore;
 import com.qudump.jiangedan.repository.girls.datasource.GirlPicDataStoreFactory;
 
@@ -42,13 +42,13 @@ public class GirlPicRepository {
         return params.toString();
     }
 
-    private Observable<List<CommentNumberRespBean>> queryCommentCounts(GirlPicDataStore dataStore, String params) {
+    private Observable<List<CommentNumberBean>> queryCommentCounts(GirlPicDataStore dataStore, String params) {
         return dataStore.commentNumbers(params);
     }
 
-    private List<GirlPic> appendCommentCountToPicModel(List<GirlPic> pics, List<CommentNumberRespBean> commentBeans) {
+    private List<GirlPic> appendCommentCountToPicModel(List<GirlPic> pics, List<CommentNumberBean> commentBeans) {
         for(GirlPic pic:pics) {
-            for(CommentNumberRespBean bean:commentBeans){
+            for(CommentNumberBean bean:commentBeans){
                 if(pic.getCommentId() == bean.getCommentId()) {
                     pic.setComments(bean.getComments());
                     continue;

@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.aspsine.irecyclerview.IViewHolder;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.Joke;
+import com.qudump.jiangedan.ui.CommentListActivity;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import java.util.ArrayList;
@@ -53,6 +55,12 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
         holder.tvLike.setText(String.valueOf(joke.getLikeCounts()));
         holder.tvDislike.setText(String.valueOf(joke.getDislikeCounts()));
         holder.tvComments.setText(String.valueOf(joke.getComments()));
+        holder.tvComments.setOnClickListener(listener->{
+            Intent intent = new Intent(mContext, CommentListActivity.class);
+            intent.putExtra(CommentListActivity.EXT_ID_KEY, joke.getCommentId());
+            intent.putExtra(CommentListActivity.EXT_IS_POST_KEY,false);
+            mContext.startActivity(intent);
+        });
 
         setAnimation(holder.card, position);
 

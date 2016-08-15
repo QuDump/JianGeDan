@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.aspsine.irecyclerview.IViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.model.LittleVideo;
+import com.qudump.jiangedan.ui.CommentListActivity;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import java.util.ArrayList;
@@ -57,6 +59,12 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
         viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
         viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
         viewHolder.tvComments.setText(String.valueOf(item.getComments()));
+        viewHolder.tvComments.setOnClickListener(listener->{
+            Intent intent = new Intent(mContext, CommentListActivity.class);
+            intent.putExtra(CommentListActivity.EXT_ID_KEY, item.getCommentId());
+            intent.putExtra(CommentListActivity.EXT_IS_POST_KEY,false);
+            mContext.startActivity(intent);
+        });
 
         setAnimation(viewHolder.card,pos);
     }

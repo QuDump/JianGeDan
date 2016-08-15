@@ -1,7 +1,7 @@
 package com.qudump.jiangedan.repository.boringpic;
 
 import com.qudump.jiangedan.model.BoringPic;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.repository.boringpic.datasource.BoringPicDataStore;
 import com.qudump.jiangedan.repository.boringpic.datasource.BoringPicDataStoreFactory;
 
@@ -42,13 +42,13 @@ public class BoringPicRepository {
         return params.toString();
     }
 
-    private Observable<List<CommentNumberRespBean>> queryCommentCounts(BoringPicDataStore dataStore,String params) {
+    private Observable<List<CommentNumberBean>> queryCommentCounts(BoringPicDataStore dataStore, String params) {
         return dataStore.commentNumbers(params);
     }
 
-    private List<BoringPic> appendCommentCountToPicModel(List<BoringPic> pics, List<CommentNumberRespBean> commentBeans) {
+    private List<BoringPic> appendCommentCountToPicModel(List<BoringPic> pics, List<CommentNumberBean> commentBeans) {
         for(BoringPic pic:pics) {
-            for(CommentNumberRespBean bean:commentBeans){
+            for(CommentNumberBean bean:commentBeans){
                 if(pic.getCommentId() == bean.getCommentId()) {
                     pic.setComments(bean.getComments());
                     continue;

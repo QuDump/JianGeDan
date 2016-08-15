@@ -3,7 +3,7 @@ package com.qudump.jiangedan.net.bean;
 /**
  * Created by dili on 2016/8/12.
  */
-public class CommentNumberRespBean extends BaseResp {
+public class CommentNumberBean extends BaseResp {
     public static final String COMMENTS = "comments";
 
     public static final String THREAD_ID = "thread_id";
@@ -14,10 +14,10 @@ public class CommentNumberRespBean extends BaseResp {
     private String thread_key;
     private long commentId;
 
-    public CommentNumberRespBean() {
+    public CommentNumberBean() {
     }
 
-    public CommentNumberRespBean(int comments, String thread_id, String thread_key) {
+    public CommentNumberBean(int comments, String thread_id, String thread_key) {
         this.comments = comments;
         this.thread_id = thread_id;
         this.thread_key = thread_key;

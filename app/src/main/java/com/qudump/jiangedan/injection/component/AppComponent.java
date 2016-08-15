@@ -23,4 +23,5 @@ public interface AppComponent {
     GirlPicComponent plus(GirlPicModule girlPicModule, CommentsModule commentsModule);
     BoringPicComponent plus(BoringPicModule boringPicModule, CommentsModule commentsModule);
     VideoComponent plus(VideoModule videoModule, CommentsModule commentsModule);
+    CommentComponent plus(CommentsModule commentsModule);
 }

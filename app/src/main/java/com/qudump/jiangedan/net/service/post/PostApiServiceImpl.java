@@ -2,7 +2,6 @@ package com.qudump.jiangedan.net.service.post;
 
 import com.qudump.jiangedan.exception.NetworkConnectionException;
 import com.qudump.jiangedan.model.Post;
-import com.qudump.jiangedan.net.bean.CommentBean;
 import com.qudump.jiangedan.net.bean.PostBean;
 
 import java.util.List;
@@ -58,16 +57,5 @@ public class PostApiServiceImpl implements PostApiService {
                 });
     }
 
-    @Override
-    public Observable<List<CommentBean>> postComments(long id) {
-        return retrofit
-                .create(PostService.class)
-                .getPostComments(id)
-                .flatMap(resp->{
-                    if(resp ==null || !resp.getStatus().equals("ok")){
-                        return Observable.error(new NetworkConnectionException());
-                    }
-                    return Observable.just(resp.getPost().getComments());
-                });
-    }
+
 }

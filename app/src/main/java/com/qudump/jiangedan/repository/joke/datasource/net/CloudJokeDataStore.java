@@ -2,7 +2,7 @@ package com.qudump.jiangedan.repository.joke.datasource.net;
 
 import com.qudump.jiangedan.cache.JokeCache;
 import com.qudump.jiangedan.model.Joke;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.net.bean.mapper.JokeBeanMapper;
 import com.qudump.jiangedan.net.service.comment.CommentApiService;
 import com.qudump.jiangedan.net.service.joke.JokeApiService;
@@ -44,7 +44,7 @@ public class CloudJokeDataStore implements JokeDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
+    public Observable<List<CommentNumberBean>> commentNumbers(String params) {
         return commentApiService.commentNumbers(params);
     }
 }

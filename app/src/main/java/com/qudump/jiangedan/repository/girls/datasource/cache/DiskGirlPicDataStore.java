@@ -2,7 +2,7 @@ package com.qudump.jiangedan.repository.girls.datasource.cache;
 
 import com.qudump.jiangedan.cache.GirlPicCache;
 import com.qudump.jiangedan.model.GirlPic;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.repository.girls.datasource.GirlPicDataStore;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class DiskGirlPicDataStore implements GirlPicDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
+    public Observable<List<CommentNumberBean>> commentNumbers(String params) {
         return null;
     }
 }

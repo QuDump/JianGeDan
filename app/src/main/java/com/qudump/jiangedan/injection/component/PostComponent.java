@@ -1,6 +1,5 @@
 package com.qudump.jiangedan.injection.component;
 
-import com.qudump.jiangedan.injection.module.PostCommentListActivityModule;
 import com.qudump.jiangedan.injection.module.PostDetailActivityModule;
 import com.qudump.jiangedan.injection.module.PostListFragmentModule;
 import com.qudump.jiangedan.injection.module.PostModule;
@@ -14,5 +13,4 @@ import dagger.Subcomponent;
 public interface PostComponent {
     PostListFragmentComponent plus(PostListFragmentModule postListFragmentModule);
     PostDetailActivityComponent plus(PostDetailActivityModule postDetailActivityModule);
-    PostCommentListComponent plus(PostCommentListActivityModule module);
 }

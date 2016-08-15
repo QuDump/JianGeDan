@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.presenter;
 
+import com.qudump.jiangedan.interactor.GetOtherComments;
 import com.qudump.jiangedan.interactor.GetPostComments;
 import com.qudump.jiangedan.model.Comment;
 
@@ -12,23 +13,30 @@ import rx.Subscriber;
 /**
  * Created by dili on 2016/8/11.
  */
-public class PostCommentListPresenter implements PostCommentListContract.Presenter {
+public class CommentListPresenter implements CommentListContract.Presenter {
 
     private GetPostComments getPostComments;
-    private PostCommentListContract.View view;
+    private GetOtherComments getOtherComments;
+    private CommentListContract.View view;
 
     @Inject
-    public PostCommentListPresenter(GetPostComments getPostComments) {
+    public CommentListPresenter(GetPostComments getPostComments, GetOtherComments getOtherComments) {
         this.getPostComments = getPostComments;
+        this.getOtherComments = getOtherComments;
     }
 
     @Override
     public void loadComments(long id) {
+        getOtherComments.setId(id).execute(new GetCommentsSubscriber());
+    }
+
+    @Override
+    public void loadPostComments(long id) {
         getPostComments.setId(id).execute(new GetCommentsSubscriber());
     }
 
     @Override
-    public void setView(PostCommentListContract.View view) {
+    public void setView(CommentListContract.View view) {
         this.view = view;
     }
 
