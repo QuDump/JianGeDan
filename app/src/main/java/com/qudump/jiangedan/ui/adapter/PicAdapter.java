@@ -69,6 +69,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
         viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
         viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
+        viewHolder.tvComments.setText(String.valueOf(item.getComments()));
 
         setAnimation(viewHolder.card,pos);
         viewHolder.card.setOnClickListener(listener->{

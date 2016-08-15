@@ -52,6 +52,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
         holder.tvPostTime.setText(String2TimeUtil.dateString2GoodExperienceFormat(joke.getDate()));
         holder.tvLike.setText(String.valueOf(joke.getLikeCounts()));
         holder.tvDislike.setText(String.valueOf(joke.getDislikeCounts()));
+        holder.tvComments.setText(String.valueOf(joke.getComments()));
 
         setAnimation(holder.card, position);
 

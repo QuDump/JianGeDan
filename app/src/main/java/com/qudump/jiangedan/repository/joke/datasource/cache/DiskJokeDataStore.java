@@ -2,6 +2,7 @@ package com.qudump.jiangedan.repository.joke.datasource.cache;
 
 import com.qudump.jiangedan.cache.JokeCache;
 import com.qudump.jiangedan.model.Joke;
+import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
 import com.qudump.jiangedan.repository.joke.datasource.JokeDataStore;
 
 import java.util.List;
@@ -23,6 +24,11 @@ public class DiskJokeDataStore implements JokeDataStore {
 
     @Override
     public Observable<List<Joke>> jokes(int page) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
         return null;
     }
 }

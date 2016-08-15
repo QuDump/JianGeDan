@@ -45,7 +45,7 @@ public class CloudBoringPicDataStore implements BoringPicDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> comments(String params) {
+    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
         return commentApiService.commentNumbers(params);
     }
 }

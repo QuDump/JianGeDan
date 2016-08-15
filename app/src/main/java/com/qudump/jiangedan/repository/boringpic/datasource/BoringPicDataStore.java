@@ -12,5 +12,5 @@ import rx.Observable;
  */
 public interface BoringPicDataStore {
     Observable<List<BoringPic>> pics(int page);
-    Observable<List<CommentNumberRespBean>> comments(String params);
+    Observable<List<CommentNumberRespBean>> commentNumbers(String params);
 }

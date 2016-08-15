@@ -10,8 +10,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * Created by qidong on 2016/8/8.
@@ -19,7 +17,6 @@ import rx.functions.Func1;
 public class BoringPicRepository {
     private BoringPicDataStoreFactory boringPicDataStoreFactory;
     private List<BoringPic> mBoringPics;
-    private List<CommentNumberRespBean> commentNumberRespBeens;
 
     @Inject
     public BoringPicRepository(BoringPicDataStoreFactory boringPicDataStoreFactory) {
@@ -30,24 +27,9 @@ public class BoringPicRepository {
         BoringPicDataStore boringPicDataStore = boringPicDataStoreFactory.createCloudDataStore();
         return boringPicDataStore
                 .pics(page)
-                .doOnNext(new Action1<List<BoringPic>>() {
-                    @Override
-                    public void call(List<BoringPic> boringPics) {
-                        mBoringPics = boringPics;
-                    }
-                })
-                .flatMap(new Func1<List<BoringPic>, Observable<List<CommentNumberRespBean>>>() {
-                    @Override
-                    public Observable<List<CommentNumberRespBean>> call(List<BoringPic> boringPics) {
-                        return queryCommentCounts(boringPicDataStore,getCommentParams(boringPics));
-                    }
-                })
-                .flatMap(new Func1<List<CommentNumberRespBean>, Observable<List<BoringPic>>>() {
-                    @Override
-                    public Observable<List<BoringPic>> call(List<CommentNumberRespBean> commentNumberRespBeen) {
-                        return Observable.just(appendCommentCountToPicModel(mBoringPics,commentNumberRespBeen));
-                    }
-                });
+                .doOnNext(boringPics->mBoringPics = boringPics)
+                .flatMap(boringPics->queryCommentCounts(boringPicDataStore,getCommentParams(boringPics)))
+                .flatMap(commentNumberRespBeen->Observable.just(appendCommentCountToPicModel(mBoringPics,commentNumberRespBeen)));
     }
 
     private String getCommentParams(List<BoringPic> pics) {
@@ -61,7 +43,7 @@ public class BoringPicRepository {
     }
 
     private Observable<List<CommentNumberRespBean>> queryCommentCounts(BoringPicDataStore dataStore,String params) {
-        return dataStore.comments(params);
+        return dataStore.commentNumbers(params);
     }
 
     private List<BoringPic> appendCommentCountToPicModel(List<BoringPic> pics, List<CommentNumberRespBean> commentBeans) {

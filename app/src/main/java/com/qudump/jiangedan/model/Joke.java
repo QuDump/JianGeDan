@@ -10,6 +10,7 @@ public class Joke {
     private String authorEmail;
     private String content;
     private String date;
+    private int comments;
     private int likeCounts;
     private int dislikeCounts;
 
@@ -75,5 +76,13 @@ public class Joke {
 
     public void setDislikeCounts(int dislikeCounts) {
         this.dislikeCounts = dislikeCounts;
+    }
+
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
     }
 }

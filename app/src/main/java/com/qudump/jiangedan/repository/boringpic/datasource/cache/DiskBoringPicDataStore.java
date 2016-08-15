@@ -29,7 +29,7 @@ public class DiskBoringPicDataStore implements BoringPicDataStore {
     }
 
     @Override
-    public Observable<List<CommentNumberRespBean>> comments(String params) {
+    public Observable<List<CommentNumberRespBean>> commentNumbers(String params) {
         return null;
     }
 }

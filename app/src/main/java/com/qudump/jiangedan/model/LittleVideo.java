@@ -10,6 +10,7 @@ public class LittleVideo {
     private String authorName;
     private String authorEmail;
     private String date;
+    private int comments;
     private int likeCounts;
     private int dislikeCounts;
     private String title;
@@ -121,5 +122,13 @@ public class LittleVideo {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
     }
 }

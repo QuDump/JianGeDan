@@ -1,18 +1,15 @@
 package com.qudump.jiangedan.net.service.comment;
 
-import com.qudump.jiangedan.net.bean.BoringPicListRespBean;
-import com.qudump.jiangedan.net.bean.CommentNumberRespBean;
+import com.qudump.jiangedan.net.bean.CommentNumberListRespBean;
 
-import java.util.List;
-
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * Created by dili on 2016/8/12.
  */
 public interface CommentService {
     @GET("/api/threads/counts.json?")
-    Call<List<CommentNumberRespBean>> comments(@Query("threads") String params);
+    Observable<CommentNumberListRespBean> comments(@Query("threads") String params);
 }

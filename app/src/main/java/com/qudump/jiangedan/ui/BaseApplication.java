@@ -12,6 +12,7 @@ import com.qudump.jiangedan.injection.component.PostComponent;
 import com.qudump.jiangedan.injection.component.VideoComponent;
 import com.qudump.jiangedan.injection.module.AppModule;
 import com.qudump.jiangedan.injection.module.BoringPicModule;
+import com.qudump.jiangedan.injection.module.CommentsModule;
 import com.qudump.jiangedan.injection.module.GirlPicModule;
 import com.qudump.jiangedan.injection.module.JokeModule;
 import com.qudump.jiangedan.injection.module.PostModule;
@@ -54,7 +55,7 @@ public class BaseApplication extends MultiDexApplication {
     }
 
     public JokeComponent buildJokeComponent(){
-        jokeComponent = appComponent.plus(new JokeModule());
+        jokeComponent = appComponent.plus(new JokeModule(),new CommentsModule());
         return jokeComponent;
     }
 
@@ -63,7 +64,7 @@ public class BaseApplication extends MultiDexApplication {
     }
 
     public GirlPicComponent buildGirlPicComponent(){
-        girlPicComponent = appComponent.plus(new GirlPicModule());
+        girlPicComponent = appComponent.plus(new GirlPicModule(),new CommentsModule());
         return girlPicComponent;
     }
 
@@ -72,7 +73,7 @@ public class BaseApplication extends MultiDexApplication {
     }
 
     public BoringPicComponent buildBoringPicComponent(){
-        boringPicComponent = appComponent.plus(new BoringPicModule());
+        boringPicComponent = appComponent.plus(new BoringPicModule(),new CommentsModule());
         return boringPicComponent;
     }
 
@@ -81,7 +82,7 @@ public class BaseApplication extends MultiDexApplication {
     }
 
     public VideoComponent buildVideoComponent(){
-        videoComponent = appComponent.plus(new VideoModule());
+        videoComponent = appComponent.plus(new VideoModule(),new CommentsModule());
         return videoComponent;
     }
 
