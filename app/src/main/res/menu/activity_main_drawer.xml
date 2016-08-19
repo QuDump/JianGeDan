@@ -5,6 +5,7 @@
         <item
             android:id="@+id/nav_post"
             android:icon="@drawable/ic_menu_post"
+            android:checked="true"
             android:title="新鲜事" />
         <item
             android:id="@+id/nav_boring_pic"

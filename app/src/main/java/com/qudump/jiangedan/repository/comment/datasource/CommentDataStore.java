@@ -12,4 +12,6 @@ import rx.Observable;
 public interface CommentDataStore {
     Observable<List<Comment>> comments(long commentId);
     Observable<List<Comment>> postComments(long id);
+    Observable<String> like(long id);
+    Observable<String> dislike(long id);
 }

@@ -20,6 +20,26 @@ public class LittleVideo {
     private String tags;
     private String thumbNail;
 
+
+    private boolean isVoted = false;
+    private boolean isLike = false;
+
+    public boolean isVoted() {
+        return isVoted;
+    }
+
+    public void setVoted(boolean voted) {
+        isVoted = voted;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
+
     public long getId() {
         return id;
     }

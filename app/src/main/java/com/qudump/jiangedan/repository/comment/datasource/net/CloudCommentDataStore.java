@@ -37,4 +37,14 @@ public class CloudCommentDataStore implements CommentDataStore {
     public Observable<List<Comment>> postComments(long id) {
         return commentApiService.postComments(id).map(commentBeanMapper::transform);
     }
+
+    @Override
+    public Observable<String> like(long id) {
+        return commentApiService.like(id);
+    }
+
+    @Override
+    public Observable<String> dislike(long id) {
+        return commentApiService.dislike(id);
+    }
 }

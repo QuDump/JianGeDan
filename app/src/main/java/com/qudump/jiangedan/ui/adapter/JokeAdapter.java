@@ -2,6 +2,7 @@ package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +14,13 @@ import android.widget.TextView;
 
 import com.aspsine.irecyclerview.IViewHolder;
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.event.AttitudeEvent;
+import com.qudump.jiangedan.event.EVENT_SOURCE;
 import com.qudump.jiangedan.model.Joke;
 import com.qudump.jiangedan.ui.CommentListActivity;
 import com.qudump.jiangedan.utils.String2TimeUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +65,43 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
             intent.putExtra(CommentListActivity.EXT_ID_KEY, joke.getCommentId());
             intent.putExtra(CommentListActivity.EXT_IS_POST_KEY,false);
             mContext.startActivity(intent);
+        });
+
+        holder.tvLike.setText("OO "+String.valueOf(joke.getLikeCounts()));
+        holder.tvDislike.setText("XX "+String.valueOf(joke.getDislikeCounts()));
+        if(joke.isVoted()) {
+            if(joke.isLike()) {
+                holder.tvLike.setTextColor(Color.RED);
+                holder.tvDislike.setTextColor(Color.parseColor("#8a000000"));
+            } else {
+                holder.tvDislike.setTextColor(Color.RED);
+                holder.tvLike.setTextColor(Color.parseColor("#8a000000"));
+            }
+
+        } else {
+            holder.tvLike.setTextColor(Color.parseColor("#8a000000"));
+            holder.tvDislike.setTextColor(Color.parseColor("#8a000000"));
+        }
+
+        holder.tvLike.setOnClickListener(listener->{
+            EventBus.getDefault().post(new AttitudeEvent(joke.getCommentId(),true, EVENT_SOURCE.SOURCE_GIRL_PIC));
+            if(!joke.isVoted()){
+                holder.tvLike.setTextColor(Color.RED);
+                joke.setLikeCounts(joke.getLikeCounts()+1);
+                joke.setVoted(true);
+                joke.setLike(true);
+                notifyItemChanged(position);
+            }
+        });
+        holder.tvDislike.setOnClickListener(listener->{
+            EventBus.getDefault().post(new AttitudeEvent(joke.getCommentId(),false,EVENT_SOURCE.SOURCE_GIRL_PIC));
+            if(!joke.isVoted()) {
+                holder.tvDislike.setTextColor(Color.RED);
+                joke.setDislikeCounts(joke.getDislikeCounts()+1);
+                joke.setVoted(true);
+                joke.setLike(false);
+                notifyItemChanged(position);
+            }
         });
 
         setAnimation(holder.card, position);

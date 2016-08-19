@@ -2,6 +2,7 @@ package com.qudump.jiangedan.injection.module;
 
 import com.qudump.jiangedan.interactor.GetVideoList;
 import com.qudump.jiangedan.interactor.Impl.GetVideoListImpl;
+import com.qudump.jiangedan.interactor.PostAttitude;
 import com.qudump.jiangedan.presenter.VideoListPresenter;
 
 import dagger.Module;
@@ -19,7 +20,7 @@ public class VideoListFragmentModule {
     }
 
     @Provides
-    VideoListPresenter providesVideoListPresenter(GetVideoList getVideoList) {
-        return new VideoListPresenter(getVideoList);
+    VideoListPresenter providesVideoListPresenter(GetVideoList getVideoList, PostAttitude postAttitude) {
+        return new VideoListPresenter(getVideoList,postAttitude);
     }
 }

@@ -11,11 +11,14 @@ import com.qudump.jiangedan.net.service.post.PostService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observable;
@@ -151,6 +154,44 @@ public class CommentApiServiceImpl implements CommentApiService {
                         return Observable.error(new NetworkConnectionException());
                     }
                     return Observable.just(resp.getPost().getComments());
+                });
+    }
+
+    @Override
+    public Observable<String> like(long id) {
+        return retrofit
+                .create(CommentService.class)
+                .like(id)
+                .flatMap(resp->{
+                    String[] result = null;
+                    try {
+                        String body = resp.body().string();
+                        result = body.split("|");
+                    } catch (IOException e) {
+                        Observable.error(new Throwable("Unexpected Error"));
+                        e.printStackTrace();
+                    }
+
+                    return Observable.just(result[1]);
+                });
+    }
+
+    @Override
+    public Observable<String> dislike(long id) {
+        return retrofit
+                .create(CommentService.class)
+                .dislike(id)
+                .flatMap(resp->{
+                    String[] result = null;
+                    try {
+                        String body = resp.body().string();
+                        result = body.split("|");
+                    } catch (IOException e) {
+                        Observable.error(new Throwable("Unexpected Error"));
+                        e.printStackTrace();
+                    }
+
+                    return Observable.just(result[1]);
                 });
     }
 }

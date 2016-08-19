@@ -2,6 +2,7 @@ package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +16,13 @@ import android.widget.TextView;
 import com.aspsine.irecyclerview.IViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.event.AttitudeEvent;
+import com.qudump.jiangedan.event.EVENT_SOURCE;
 import com.qudump.jiangedan.model.LittleVideo;
 import com.qudump.jiangedan.ui.CommentListActivity;
 import com.qudump.jiangedan.utils.String2TimeUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,14 +61,47 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder>{
         viewHolder.tvTitle.setText(item.getTitle());
         viewHolder.tvAuthor.setText(item.getAuthorName());
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
-        viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
-        viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
         viewHolder.tvComments.setText(String.valueOf(item.getComments()));
         viewHolder.tvComments.setOnClickListener(listener->{
             Intent intent = new Intent(mContext, CommentListActivity.class);
             intent.putExtra(CommentListActivity.EXT_ID_KEY, item.getCommentId());
             intent.putExtra(CommentListActivity.EXT_IS_POST_KEY,false);
             mContext.startActivity(intent);
+        });
+        viewHolder.tvLike.setText("OO "+String.valueOf(item.getLikeCounts()));
+        viewHolder.tvDislike.setText("XX "+String.valueOf(item.getDislikeCounts()));
+        if(item.isVoted()) {
+            if(item.isLike()) {
+                viewHolder.tvLike.setTextColor(Color.RED);
+                viewHolder.tvDislike.setTextColor(Color.parseColor("#8a000000"));
+            } else {
+                viewHolder.tvDislike.setTextColor(Color.RED);
+                viewHolder.tvLike.setTextColor(Color.parseColor("#8a000000"));
+            }
+        } else {
+            viewHolder.tvLike.setTextColor(Color.parseColor("#8a000000"));
+            viewHolder.tvDislike.setTextColor(Color.parseColor("#8a000000"));
+        }
+
+        viewHolder.tvLike.setOnClickListener(listener->{
+            EventBus.getDefault().post(new AttitudeEvent(item.getCommentId(),true, EVENT_SOURCE.SOURCE_GIRL_PIC));
+            if(!item.isVoted()){
+                viewHolder.tvLike.setTextColor(Color.RED);
+                item.setLikeCounts(item.getLikeCounts()+1);
+                item.setVoted(true);
+                item.setLike(true);
+                notifyItemChanged(pos);
+            }
+        });
+        viewHolder.tvDislike.setOnClickListener(listener->{
+            EventBus.getDefault().post(new AttitudeEvent(item.getCommentId(),false,EVENT_SOURCE.SOURCE_GIRL_PIC));
+            if(!item.isVoted()) {
+                viewHolder.tvDislike.setTextColor(Color.RED);
+                item.setDislikeCounts(item.getDislikeCounts()+1);
+                item.setVoted(true);
+                item.setLike(false);
+                notifyItemChanged(pos);
+            }
         });
 
         setAnimation(viewHolder.card,pos);

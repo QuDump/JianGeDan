@@ -2,6 +2,7 @@ package com.qudump.jiangedan.injection.module;
 
 import com.qudump.jiangedan.interactor.GetBoringPicList;
 import com.qudump.jiangedan.interactor.Impl.GetBoringPicListImpl;
+import com.qudump.jiangedan.interactor.PostAttitude;
 import com.qudump.jiangedan.presenter.BoringPicListPresenter;
 
 import javax.inject.Inject;
@@ -20,7 +21,7 @@ public class BoringPicListFragmentModule {
     }
 
     @Provides
-    BoringPicListPresenter providesBoringPicListPresenter(GetBoringPicList getBoringPicList) {
-        return new BoringPicListPresenter(getBoringPicList);
+    BoringPicListPresenter providesBoringPicListPresenter(GetBoringPicList getBoringPicList, PostAttitude postAttitude) {
+        return new BoringPicListPresenter(getBoringPicList,postAttitude);
     }
 }

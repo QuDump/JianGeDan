@@ -2,6 +2,7 @@ package com.qudump.jiangedan.injection.module;
 
 import com.qudump.jiangedan.interactor.GetGirlPicList;
 import com.qudump.jiangedan.interactor.Impl.GetGirlPicListImpl;
+import com.qudump.jiangedan.interactor.PostAttitude;
 import com.qudump.jiangedan.presenter.GirlPicPresenter;
 
 import dagger.Module;
@@ -16,8 +17,9 @@ public class GirlPicListFragmentModule {
     GetGirlPicList providesGetGirlPicList(GetGirlPicListImpl getGirlPicList) {
         return getGirlPicList;
     }
+
     @Provides
-    GirlPicPresenter providesGirlPicPresenter(GetGirlPicList getGirlPicList) {
-        return new GirlPicPresenter(getGirlPicList);
+    GirlPicPresenter providesGirlPicPresenter(GetGirlPicList getGirlPicList, PostAttitude postAttitude) {
+        return new GirlPicPresenter(getGirlPicList,postAttitude);
     }
 }

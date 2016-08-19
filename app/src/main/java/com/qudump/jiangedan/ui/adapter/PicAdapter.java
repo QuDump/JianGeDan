@@ -2,6 +2,7 @@ package com.qudump.jiangedan.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +18,14 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.event.EVENT_SOURCE;
+import com.qudump.jiangedan.event.AttitudeEvent;
 import com.qudump.jiangedan.model.GirlPic;
 import com.qudump.jiangedan.ui.CommentListActivity;
 import com.qudump.jiangedan.ui.PicViewerActivity;
 import com.qudump.jiangedan.utils.String2TimeUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +58,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int pos) {
-        final GirlPic item = picList.get(pos);
+        GirlPic item = picList.get(pos);
 
         if(item.getPics().get(0).toLowerCase().endsWith("gif")){
             DraweeController draweeController = Fresco
@@ -68,8 +73,6 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
         viewHolder.tvAuthor.setText(item.getAuthorName());
         viewHolder.tvDate.setText(String2TimeUtil.dateString2GoodExperienceFormat(item.getDate()));
-        viewHolder.tvLike.setText(String.valueOf(item.getLikeCounts()));
-        viewHolder.tvDislike.setText(String.valueOf(item.getDislikeCounts()));
         viewHolder.tvComments.setText(String.valueOf(item.getComments()));
         viewHolder.tvComments.setOnClickListener(listener->{
             Intent intent = new Intent(mContext, CommentListActivity.class);
@@ -83,6 +86,43 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
             Intent intent = new Intent(mContext, PicViewerActivity.class);
             intent.putExtra(PicViewerActivity.EXT_KEY_IMG_URL,item.getPics().get(0));
             mContext.startActivity(intent);
+        });
+
+        viewHolder.tvLike.setText("OO "+String.valueOf(item.getLikeCounts()));
+        viewHolder.tvDislike.setText("XX "+String.valueOf(item.getDislikeCounts()));
+        if(item.isVoted()) {
+            if(item.isLike()) {
+                viewHolder.tvLike.setTextColor(Color.RED);
+                viewHolder.tvDislike.setTextColor(Color.parseColor("#8a000000"));
+            } else {
+                viewHolder.tvDislike.setTextColor(Color.RED);
+                viewHolder.tvLike.setTextColor(Color.parseColor("#8a000000"));
+            }
+
+        } else {
+            viewHolder.tvLike.setTextColor(Color.parseColor("#8a000000"));
+            viewHolder.tvDislike.setTextColor(Color.parseColor("#8a000000"));
+        }
+
+        viewHolder.tvLike.setOnClickListener(listener->{
+            EventBus.getDefault().post(new AttitudeEvent(item.getCommentId(),true, EVENT_SOURCE.SOURCE_GIRL_PIC));
+            if(!item.isVoted()){
+                viewHolder.tvLike.setTextColor(Color.RED);
+                item.setLikeCounts(item.getLikeCounts()+1);
+                item.setVoted(true);
+                item.setLike(true);
+                notifyItemChanged(pos);
+            }
+        });
+        viewHolder.tvDislike.setOnClickListener(listener->{
+            EventBus.getDefault().post(new AttitudeEvent(item.getCommentId(),false,EVENT_SOURCE.SOURCE_GIRL_PIC));
+            if(!item.isVoted()) {
+                viewHolder.tvDislike.setTextColor(Color.RED);
+                item.setDislikeCounts(item.getDislikeCounts()+1);
+                item.setVoted(true);
+                item.setLike(false);
+                notifyItemChanged(pos);
+            }
         });
     }
 

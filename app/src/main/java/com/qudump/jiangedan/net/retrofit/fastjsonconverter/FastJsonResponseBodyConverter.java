@@ -29,7 +29,8 @@ public class FastJsonResponseBodyConverter <T> implements Converter<ResponseBody
     public T convert(ResponseBody value) throws IOException {
 
         try {
-            return JSON.parseObject(value.string(), type);
+            String input = value.string();
+            return JSON.parseObject(input, type);
         } finally {
             value.close();
         }

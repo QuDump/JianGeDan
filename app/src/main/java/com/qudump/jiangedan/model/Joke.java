@@ -14,6 +14,25 @@ public class Joke {
     private int likeCounts;
     private int dislikeCounts;
 
+    private boolean isVoted = false;
+    private boolean isLike = false;
+
+    public boolean isVoted() {
+        return isVoted;
+    }
+
+    public void setVoted(boolean voted) {
+        isVoted = voted;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
+
     public long getId() {
         return id;
     }

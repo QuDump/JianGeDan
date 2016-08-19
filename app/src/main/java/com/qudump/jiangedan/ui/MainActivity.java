@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,13 +24,20 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Fragment currentFragment;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final ActionBar actionBar = getSupportActionBar();
+        if(null != actionBar) {
+            actionBar.setHomeAsUpIndicator(R.mipmap.ic_back);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -40,7 +48,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        replaceFragment(new PostListFragment());
+        navigationView.getMenu().performIdentifierAction(R.id.nav_post, 0);
     }
 
     @Override
@@ -83,14 +91,19 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_post) {
             replaceFragment(new PostListFragment());
+            toolbar.setTitle("新鲜事");
         } else if (id == R.id.nav_boring_pic) {
             replaceFragment(new BoringPicListFragment());
+            toolbar.setTitle("无聊图");
         } else if (id == R.id.nav_joke) {
             replaceFragment(new JokeListFragment());
+            toolbar.setTitle("段子");
         } else if (id == R.id.nav_girls) {
             replaceFragment(new GirlPicListFragment());
+            toolbar.setTitle("妹子图");
         } else if (id == R.id.nav_video) {
             replaceFragment(new VideoListFragment());
+            toolbar.setTitle("小电影");
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_feedback) {
