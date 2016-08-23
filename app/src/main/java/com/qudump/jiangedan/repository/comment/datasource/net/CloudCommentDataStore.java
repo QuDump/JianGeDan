@@ -6,7 +6,9 @@ import com.qudump.jiangedan.net.bean.mapper.DuoShuoCommentBeanMapper;
 import com.qudump.jiangedan.net.service.comment.CommentApiService;
 import com.qudump.jiangedan.repository.comment.datasource.CommentDataStore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -46,5 +48,18 @@ public class CloudCommentDataStore implements CommentDataStore {
     @Override
     public Observable<String> dislike(long id) {
         return commentApiService.dislike(id);
+    }
+
+    @Override
+    public Observable<Boolean> writeComment(Comment comment) {
+        Map<String,String> content = new HashMap<>();
+        content.put("author_name",comment.getAuthorName());
+        content.put("thread_id",comment.getThreadId());
+        content.put("author_email",comment.getAuthorEmail());
+        content.put("message",comment.getContent());
+//        content.put("parent_id",comment.getParentId());
+        content.put("parent_id",comment.getParentId()==null?"":comment.getParentId());
+
+        return commentApiService.writeComment(content);
     }
 }

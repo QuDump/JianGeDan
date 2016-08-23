@@ -16,6 +16,24 @@ public class Comment {
     private String parentId;
     private boolean isHotComment;
     private String postId;
+    private String authorEmail;
+    private String threadId;
+
+    public String getThreadId() {
+        return threadId;
+    }
+
+    public void setThreadId(String threadId) {
+        this.threadId = threadId;
+    }
+
+    public String getAuthorEmail() {
+        return authorEmail;
+    }
+
+    public void setAuthorEmail(String authorEmail) {
+        this.authorEmail = authorEmail;
+    }
 
     public String getPostId() {
         return postId;

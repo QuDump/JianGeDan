@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.aspsine.irecyclerview.IRecyclerView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rv_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:refreshHeaderLayout="@layout/layout_irecyclerview_refresh_header"
-    app:loadMoreEnabled="false"
-    app:refreshEnabled="true"/>
+    android:orientation="vertical">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@mipmap/ic_back"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+
+    <com.aspsine.irecyclerview.IRecyclerView
+        android:layout_below="@+id/appBar"
+        android:id="@+id/rv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:refreshHeaderLayout="@layout/layout_irecyclerview_refresh_header"
+        app:loadMoreEnabled="false"
+        app:refreshEnabled="true"/>
+    
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@mipmap/ic_new_comment"/>
+
+</RelativeLayout>

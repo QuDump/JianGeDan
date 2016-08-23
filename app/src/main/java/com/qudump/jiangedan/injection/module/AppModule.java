@@ -10,14 +10,12 @@ import com.qudump.jiangedan.net.interceptor.UserAgentInterceptor;
 import com.qudump.jiangedan.net.retrofit.fastjsonconverter.FastJsonConverterFactory;
 import com.qudump.jiangedan.ui.BaseApplication;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
@@ -51,7 +49,7 @@ public class AppModule {
     @Provides @Singleton
     public OkHttpClient provideOkHttpClient(){
         return new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
                 .addInterceptor(new UserAgentInterceptor("Jandan Android App V3.0.0.2"))
                 .build();
     }
@@ -66,11 +64,4 @@ public class AppModule {
                 .build();
     }
 
-    @Provides @Singleton
-    public Retrofit.Builder provideRetrofitBuilder(OkHttpClient client){
-        return new Retrofit.Builder()
-                .client(client)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(FastJsonConverterFactory.create());
-    }
 }

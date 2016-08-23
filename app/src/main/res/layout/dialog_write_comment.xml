@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/ll_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="昵称"
+            android:textColor="@color/secondary_text_default_material_light"/>
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textEmailAddress"
+            android:hint="邮箱"
+            android:textColor="@color/secondary_text_default_material_light"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
+        android:id="@+id/tv_reply_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="回复给："
+        android:textSize="17sp"
+        android:textColor="@color/secondary_text_default_material_light"/>
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="评论内容"
+        android:textColor="@color/secondary_text_default_material_light"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_submit"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:text="发表评论"-->
+        <!--android:textSize="17sp"-->
+        <!--android:background="@drawable/white_btn_bg"-->
+        <!--android:textColor="@color/red"/>-->
+</LinearLayout>

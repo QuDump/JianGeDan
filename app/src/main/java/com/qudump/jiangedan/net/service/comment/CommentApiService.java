@@ -1,11 +1,11 @@
 package com.qudump.jiangedan.net.service.comment;
 
-import com.qudump.jiangedan.net.bean.BaseResp;
 import com.qudump.jiangedan.net.bean.CommentBean;
 import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.net.bean.DuoshuoCommentBean;
 
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -18,4 +18,5 @@ public interface CommentApiService {
     Observable<List<CommentBean>> postComments(long id);
     Observable<String> like(long id);
     Observable<String> dislike(long id);
+    Observable<Boolean> writeComment(Map<String,String> param);
 }

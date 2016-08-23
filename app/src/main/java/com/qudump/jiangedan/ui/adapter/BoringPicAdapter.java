@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.aspsine.irecyclerview.IViewHolder;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qudump.jiangedan.R;
@@ -23,6 +25,7 @@ import com.qudump.jiangedan.event.EVENT_SOURCE;
 import com.qudump.jiangedan.model.BoringPic;
 import com.qudump.jiangedan.ui.CommentListActivity;
 import com.qudump.jiangedan.ui.PicViewerActivity;
+import com.qudump.jiangedan.ui.widget.CircleProgressBar;
 import com.qudump.jiangedan.utils.String2TimeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -59,11 +62,15 @@ public class BoringPicAdapter extends RecyclerView.Adapter<BoringPicAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int pos) {
         final BoringPic item = picList.get(pos);
-
+        GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(mContext.getResources())
+                .setProgressBarImage(new CircleProgressBar())
+                .build();
+        viewHolder.img.setHierarchy(hierarchy);
         if(item.getPics().get(0).toLowerCase().endsWith("gif")) {
+
             DraweeController draweeController = Fresco
                     .newDraweeControllerBuilder()
-                    .setUri(Uri.parse(item.getPics().get(0)))
+                    .setUri(item.getPics().get(0))
                     .setAutoPlayAnimations(true)
                     .build();
             viewHolder.img.setController(draweeController);

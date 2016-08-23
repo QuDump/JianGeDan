@@ -18,12 +18,5 @@ public interface PostService {
     @GET("/?oxwlxojflwblxbsapi=get_post&include=content")
     Observable<PostDetailRespBean> getPostDetail(@Query("id") long id);
 
-    @GET("/?oxwlxojflwblxbsapi=get_post&include=comments")
-    Observable<PostDetailRespBean> getPostComments( @Query("id") long id);
 
-    @POST("/")
-    Observable<PostDetailRespBean> postAttitude();
-
-    @POST("/")
-    Observable<PostDetailRespBean> postComment();
 }

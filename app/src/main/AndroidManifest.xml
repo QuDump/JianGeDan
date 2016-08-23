@@ -23,8 +23,12 @@
         <activity android:name=".ui.PostDetailActivity"
             android:theme="@style/PostDetailActivityTheme"/>
 
-        <activity android:name=".ui.PicViewerActivity"/>
-        <activity android:name=".ui.CommentListActivity"/>
+        <activity
+            android:name=".ui.PicViewerActivity"
+            android:theme="@style/PostDetailActivityTheme"/>
+        <activity
+            android:name=".ui.CommentListActivity"
+            android:theme="@style/PostDetailActivityTheme"/>
     </application>
 
 </manifest>

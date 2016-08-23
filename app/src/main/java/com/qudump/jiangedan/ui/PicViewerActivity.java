@@ -8,9 +8,12 @@ import android.os.Bundle;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.qudump.jiangedan.R;
+import com.qudump.jiangedan.ui.widget.CircleProgressBar;
 import com.qudump.jiangedan.ui.widget.WrapContentDraweeView;
 
 import butterknife.Bind;
@@ -38,6 +41,10 @@ public class PicViewerActivity extends Activity {
     }
 
     private void showImg(String url) {
+        GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(getResources())
+                .setProgressBarImage(new CircleProgressBar())
+                .build();
+        img.setHierarchy(hierarchy);
         if(url.endsWith("gif")) {
             DraweeController draweeController = Fresco
                     .newDraweeControllerBuilder()

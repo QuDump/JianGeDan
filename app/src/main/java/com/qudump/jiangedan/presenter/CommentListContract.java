@@ -15,5 +15,6 @@ public interface CommentListContract {
     interface Presenter extends BasePresenter<View> {
         void loadComments(long id);
         void loadPostComments(long id);
+        void writeComment(Comment comment);
     }
 }

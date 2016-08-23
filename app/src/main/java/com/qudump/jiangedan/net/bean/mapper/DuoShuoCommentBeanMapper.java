@@ -21,7 +21,8 @@ public class DuoShuoCommentBeanMapper {
         Comment comment = null;
         if(null != bean) {
             comment = new Comment();
-            comment.setDate(bean.getCreated_at());
+            comment.setThreadId(bean.getThread_id());
+            comment.setDate(bean.getCreated_at().replace('T',' ').replace('+',' '));
             comment.setDislike(bean.getDislike());
             comment.setLike(bean.getLike());
             comment.setPostId(bean.getPost_id());

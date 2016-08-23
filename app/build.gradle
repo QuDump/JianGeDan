@@ -54,4 +54,6 @@ dependencies {
     compile rootProject.ext.frescoGIF
     compile rootProject.ext.IRecyclerView
 
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+
 }

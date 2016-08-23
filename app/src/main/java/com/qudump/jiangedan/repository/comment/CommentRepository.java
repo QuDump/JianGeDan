@@ -40,4 +40,9 @@ public class CommentRepository {
         commentDataStore = commentDataStoreFactory.createCloudDataStore();
         return commentDataStore.dislike(id);
     }
+
+    public Observable<Boolean> writeComment(Comment comment) {
+        commentDataStore = commentDataStoreFactory.createCloudDataStore();
+        return commentDataStore.writeComment(comment);
+    }
 }

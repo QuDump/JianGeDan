@@ -5,8 +5,6 @@ import com.qudump.jiangedan.exception.NetworkConnectionException;
 import com.qudump.jiangedan.net.bean.CommentBean;
 import com.qudump.jiangedan.net.bean.CommentNumberBean;
 import com.qudump.jiangedan.net.bean.DuoshuoCommentBean;
-import com.qudump.jiangedan.net.retrofit.fastjsonconverter.FastJsonConverterFactory;
-import com.qudump.jiangedan.net.service.post.PostService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,13 +12,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
-
-import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observable;
 
 /**
@@ -37,12 +33,7 @@ public class CommentApiServiceImpl implements CommentApiService {
     @Override
     public Observable<List<CommentNumberBean>> commentNumbers(String params) {
         List<CommentNumberBean> commentNumbers = new ArrayList<>();
-        return new Retrofit
-                .Builder()
-                .addConverterFactory(FastJsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl("http://jandan.duoshuo.com")
-                .build()
+        return retrofit
                 .create(CommentService.class)
                 .commentNumbers(params)
                 .flatMap(resp->{
@@ -80,12 +71,7 @@ public class CommentApiServiceImpl implements CommentApiService {
     @Override
     public Observable<List<DuoshuoCommentBean>> comments(String commentId) {
         List<DuoshuoCommentBean> commentBeanList = new ArrayList<>();
-        return new Retrofit
-                .Builder()
-                .addConverterFactory(FastJsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl("http://jandan.duoshuo.com")
-                .build()
+        return retrofit
                 .create(CommentService.class)
                 .comments(commentId)
                 .flatMap(resp->{
@@ -147,7 +133,7 @@ public class CommentApiServiceImpl implements CommentApiService {
     @Override
     public Observable<List<CommentBean>> postComments(long id) {
         return retrofit
-                .create(PostService.class)
+                .create(CommentService.class)
                 .getPostComments(id)
                 .flatMap(resp->{
                     if(resp ==null || !resp.getStatus().equals("ok")){
@@ -190,8 +176,21 @@ public class CommentApiServiceImpl implements CommentApiService {
                         Observable.error(new Throwable("Unexpected Error"));
                         e.printStackTrace();
                     }
-
                     return Observable.just(result[1]);
+                });
+    }
+
+    @Override
+    public Observable<Boolean> writeComment(Map<String, String> param) {
+
+        return retrofit
+                .create(CommentService.class)
+                .writeComment(param)
+                .flatMap(resp->{
+                    if(resp.getCode() != 0){
+                        return Observable.error(new Throwable("network error"));
+                    }
+                    return Observable.just(true);
                 });
     }
 }
