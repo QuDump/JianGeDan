@@ -1,6 +1,7 @@
 package com.qudump.jiangedan.net.service.comment;
 
 import com.alibaba.fastjson.JSON;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.qudump.jiangedan.exception.NetworkConnectionException;
 import com.qudump.jiangedan.net.bean.CommentBean;
 import com.qudump.jiangedan.net.bean.CommentNumberBean;
@@ -180,8 +181,15 @@ public class CommentApiServiceImpl implements CommentApiService {
                 });
     }
 
+    @RxLogObservable
     @Override
     public Observable<Boolean> writeComment(Map<String, String> param) {
+//        RxAndroidPlugins.getInstance().registerSchedulersHook(new RxAndroidSchedulersHook() {
+//            @Override
+//            public Scheduler getMainThreadScheduler() {
+//                return Schedulers.immediate();
+//            }
+//        });
 
         return retrofit
                 .create(CommentService.class)

@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.android.application'
+apply plugin: 'com.fernandocejas.frodo'
 
 android {
     compileSdkVersion 23
@@ -23,6 +25,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+frodo {
+    enabled = true
 }
 
 dependencies {

@@ -57,8 +57,8 @@ public class CloudCommentDataStore implements CommentDataStore {
         content.put("thread_id",comment.getThreadId());
         content.put("author_email",comment.getAuthorEmail());
         content.put("message",comment.getContent());
-//        content.put("parent_id",comment.getParentId());
-        content.put("parent_id",comment.getParentId()==null?"":comment.getParentId());
+        content.put("parent_id",comment.getParentId());
+        //content.put("parent_id",comment.getParentId()==null?"":comment.getParentId());
 
         return commentApiService.writeComment(content);
     }

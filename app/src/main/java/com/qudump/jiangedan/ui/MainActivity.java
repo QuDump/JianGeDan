@@ -10,8 +10,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.qudump.jiangedan.R;
 import com.qudump.jiangedan.ui.fragment.BoringPicListFragment;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity
 
     Fragment currentFragment;
     Toolbar toolbar;
+    private long lastClick = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,5 +122,21 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_container, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == event.KEYCODE_BACK) {
+
+            long current = System.currentTimeMillis();
+            if(current - lastClick < 1000){
+                finish();
+            } else {
+                lastClick = current;
+                Toast.makeText(this,"再按一次退出煎蛋",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

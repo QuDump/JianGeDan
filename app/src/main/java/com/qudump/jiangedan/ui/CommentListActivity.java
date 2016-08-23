@@ -83,6 +83,9 @@ public class CommentListActivity extends AppCompatActivity implements CommentLis
 
     void init(){
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(listener->{
+            finish();
+        });
 
         if(null != getIntent()) {
             id = getIntent().getLongExtra(EXT_ID_KEY,0L);

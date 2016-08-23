@@ -1,5 +1,6 @@
 package com.qudump.jiangedan.presenter;
 
+import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 import com.qudump.jiangedan.interactor.GetOtherComments;
 import com.qudump.jiangedan.interactor.GetPostComments;
 import com.qudump.jiangedan.interactor.PostComment;
@@ -81,6 +82,8 @@ public class CommentListPresenter implements CommentListContract.Presenter {
         }
     }
 
+
+    @RxLogSubscriber
     public class PostCommentSubscriber extends Subscriber<Boolean> {
         @Override
         public void onCompleted() {
